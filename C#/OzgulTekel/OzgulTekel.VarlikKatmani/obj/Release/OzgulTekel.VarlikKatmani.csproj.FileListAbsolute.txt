@@ -1,0 +1,6 @@
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\bin\Release\OzgulTekel.VarlikKatmani.dll
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\bin\Release\OzgulTekel.VarlikKatmani.pdb
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\obj\Release\OzgulTekel.VarlikKatmani.csprojAssemblyReference.cache
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\obj\Release\OzgulTekel.VarlikKatmani.csproj.CoreCompileInputs.cache
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\obj\Release\OzgulTekel.VarlikKatmani.dll
+C:\Users\kemal\source\repos\OzgulTekel\OzgulTekel.VarlikKatmani\obj\Release\OzgulTekel.VarlikKatmani.pdb

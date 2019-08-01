@@ -1,0 +1,7 @@
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\bin\Debug\DebugConsole.pdb
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\obj\Debug\DebugConsole.csprojResolveAssemblyReference.cache
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\obj\Debug\DebugConsole.csproj.GenerateResource.Cache
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\obj\Debug\DebugConsole.dll
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\obj\Debug\DebugConsole.pdb
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\obj\Debug\DebugConsole.Forms.DebugConsole.resources
+C:\Users\Kuzziunns\Desktop\Projects\2012\DebugConsole\DebugConsole\bin\Debug\DebugConsole.dll
