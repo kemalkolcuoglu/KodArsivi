@@ -1,0 +1,68 @@
+﻿@model QRWebCMS.Web.Models.Icerik
+
+@using (Html.BeginForm("IcerikDuzenle", "Bilesenler", FormMethod.Post))
+{
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">İçerik Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Baslik, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Baslik, new { htmlAttributes = new { @class = "form-control", placeholder = "İçerik Başlığı" } })
+                            @Html.ValidationMessageFor(model => model.Baslik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Detay, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.TextAreaFor(model => model.Detay, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Detay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gorsel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Gorsel, new { htmlAttributes = new { @class = "form-control", placeholder = "Görsel" } })
+                            @Html.ValidationMessageFor(model => model.Gorsel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EkAlan1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.EkAlan1, new { htmlAttributes = new { @class = "form-control", placeholder = "Ek Alan-1" } })
+                            @Html.ValidationMessageFor(model => model.EkAlan1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EkAlan2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.EkAlan2, new { htmlAttributes = new { @class = "form-control", placeholder = "Ek Alan-2" } })
+                            @Html.ValidationMessageFor(model => model.EkAlan2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Etkin)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-close"></i> İptal</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+            </div>
+        </div>
+    </div>
+}
+
+

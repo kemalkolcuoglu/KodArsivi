@@ -1,0 +1,183 @@
+﻿@{
+    Layout = null;
+    QRWebCMS.Web.Models.GenelAyarlar ga = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri.Bul("1 = 1");
+    List<QRWebCMS.Web.Models.SosyalMedya> sm = QRWebCMS.Web.App_Start.Tanimlamalar.sosyalMedyaIslemleri.VeriGetir("1 = 1");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>QR Web CMS - Site Bakımda</title>
+    <meta name="author" content="QRYAZILIM">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/Assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/animate/animate.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/owl.carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/owl.carousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="~/Assets/Content/theme.css">
+    <link rel="stylesheet" href="~/Assets/Content/theme-elements.css">
+    <link rel="stylesheet" href="~/Assets/Content/theme-blog.css">
+    <link rel="stylesheet" href="~/Assets/Content/theme-shop.css">
+    <link rel="stylesheet" href="~/Assets/Content/skins/default.css">
+    <link rel="stylesheet" href="~/Assets/Content/custom.css">
+    <script src="~/Assets/vendor/modernizr/modernizr.min.js"></script>
+
+</head>
+<body>
+
+    <div class="body coming-soon">
+        <header id="header" data-plugin-options="{'stickyEnabled': false}">
+            <div class="header-body border border-top-0 border-right-0 border-left-0">
+                <div class="header-container container py-2">
+                    <div class="header-row">
+                        <div class="header-column">
+                            <div class="header-row">
+                                <p class="mb-0"><strong>Bizimle iletişime Geçin!</strong> @ga.Telefon</span><span class="d-none d-sm-inline-block pl-1"> | <a href="#">@ga.EPosta</a></span></p>
+                            </div>
+                        </div>
+                        <div class="header-column justify-content-end">
+                            <div class="header-row">
+                                <ul class="header-social-icons social-icons mr-2">
+                                    @foreach (var item in sm)
+                                    {
+                                        <li class="social-icons-linkedin"><a href="@item.Link" target="_blank" title="@item.Baslik"><i class="@item.Ikon"></i></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div role="main" class="main">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img width="100" height="48" src="~/Assets/Image/logo.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr class="solid my-5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="font-weight-normal text-7 mb-2"><strong class="font-weight-extra-bold">Sitemiz Yakında Sizlerle!</strong></h2>
+                        <p class="mb-0 lead">Çalışmalarımız devam ediyor. Sizlere en iyi hizmeti sunabilmek için teknolojilerimizi geliştiriyoruz. </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr class="solid my-5">
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-2">
+                    <div class="col-lg-6">
+                        <div class="progress-bars mt-4">
+                            <div class="progress-label text-2">
+                                <span><strong>İlerleme:</strong></span>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar progress-bar-primary" data-appear-progress-animation="100%">
+                                    <span class="progress-bar-tooltip">90%</span>
+                                </div>
+                            </div>
+                            <div class="progress-label text-2">
+                                <span><strong>Tasarım</strong></span>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar progress-bar-primary" data-appear-progress-animation="85%" data-appear-animation-delay="300">
+                                    <span class="progress-bar-tooltip">85%</span>
+                                </div>
+                            </div>
+                            <div class="progress-label text-2">
+                                <span><strong>Geliştirme</strong></span>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar progress-bar-primary" data-appear-progress-animation="75%" data-appear-animation-delay="600">
+                                    <span class="progress-bar-tooltip">95%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row py-5">
+                    <div class="col-md-4 d-flex justify-content-center justify-content-md-start mb-4 mb-lg-0">
+                        <a href="~/Ev/Anasayfa" class="logo pr-0 pr-lg-3 pl-3 pl-md-0">
+                            <img src="~/Assets/Image/logo.png" height="33">
+                        </a>
+                    </div>
+                    <div class="col-md-8 d-flex justify-content-center justify-content-md-end mb-4 mb-lg-0">
+                        <div class="row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="ml-3 text-center text-md-right">
+                                    <h5 class="text-3 mb-0 text-color-light">İLETİŞİM HATTI</h5>
+                                    <p class="text-4 mb-0"><i class="fab fa-whatsapp text-color-primary top-1 p-relative"></i><span class="pl-1">@ga.Telefon</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright footer-copyright-style-2">
+                <div class="container py-2">
+                    <div class="row py-4">
+                        <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mb-2 mb-lg-0">
+                            <p>© @ga.SirketAdi 2019. BÜTÜN HAKLARI SAKLIDIR.</p>
+                        </div>
+                        <div class="col-md-8 d-flex align-items-center justify-content-center justify-content-md-end mb-4 mb-lg-0">
+                            <p><i class="far fa-envelope text-color-primary top-1 p-relative"></i><a href="mailto:@ga.EPosta" class="opacity-7 pl-1">@ga.EPosta</a></p>
+                            <ul class="footer-social-icons social-icons social-icons-clean social-icons-icon-light ml-3">
+                                @foreach (var item in sm)
+                                {
+                                    <li class="social-icons-linkedin"><a href="@item.Link" target="_blank" title="@item.Baslik"><i class="@item.Ikon"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/vendor/jquery.appear/jquery.appear.min.js"></script>
+    <script src="~/Assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/Assets/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+    <script src="~/Assets/vendor/popper/umd/popper.min.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Assets/vendor/common/common.min.js"></script>
+    <script src="~/Assets/vendor/jquery.validation/jquery.validate.min.js"></script>
+    <script src="~/Assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="~/Assets/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+    <script src="~/Assets/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+    <script src="~/Assets/vendor/isotope/jquery.isotope.min.js"></script>
+    <script src="~/Assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/Assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/Assets/vendor/vide/jquery.vide.min.js"></script>
+    <script src="~/Assets/vendor/vivus/vivus.min.js"></script>
+    <script src="~/Assets/Script/theme.js"></script>
+    <script src="~/Assets/Script/custom.js"></script>
+    <script src="~/Assets/Script/theme.init.js"></script>
+</body>
+</html>
+

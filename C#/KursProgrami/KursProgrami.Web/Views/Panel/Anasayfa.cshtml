@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+
+    int ogrenciSayisi = KursProgrami.Web.App_Start.Tanimlamalar.ogrenciIslemleri.VeriSayisi();
+    int egitmenSayisi = KursProgrami.Web.App_Start.Tanimlamalar.egitmenIslemleri.VeriSayisi();
+    int sinifSayisi = KursProgrami.Web.App_Start.Tanimlamalar.sinifIslemleri.VeriSayisi();
+}
+
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Panel</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Anasayfa</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-blue web-num-card">
+                            <a href="~/Kisiler/Ogrenciler">
+                                <div class="card-block text-white">
+                                    <h5 class="m-t-15">Öğrenciler</h5>
+                                    <h3 class="m-b-15">@ogrenciSayisi</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-green web-num-card">
+                            <a href="~/Kisiler/Egitmenler">
+                                <div class="card-block text-white">
+                                    <h5 class="m-t-15">Eğitmen</h5>
+                                    <h3 class="m-b-15">@egitmenSayisi</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-red web-num-card">
+                            <a href="~/KursTanim/Siniflar">
+                                <div class="card-block text-white">
+                                    <h5 class="m-t-15">Sınıf</h5>
+                                    <h3 class="m-b-15">@sinifSayisi</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-yellow web-num-card">
+                            <a href="#">
+                                <div class="card-block text-white">
+                                    <h5 class="m-t-15"></h5>
+                                    <h3 class="m-b-15"></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

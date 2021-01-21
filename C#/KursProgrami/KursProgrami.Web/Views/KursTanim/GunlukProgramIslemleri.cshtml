@@ -1,0 +1,82 @@
+﻿@model KursProgrami.Model.GunlukProgram
+@{
+    ViewBag.Title = "Günlük Program İşlemleri";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Günlük Program İşlemleri</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanımları</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/KursTanim/GunlukProgramlar">Günlük Programlar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Dönem İşlemleri</h5>
+    </div>
+    <div class="card-block">
+        @if (ViewBag.Hata != null)
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.Hata
+                    </div>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GunlukProgramAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.GunlukProgramAdi, new { htmlAttributes = new { @class = "form-control", placeholder = "Program Adı" } })
+                            @Html.ValidationMessageFor(model => model.GunlukProgramAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GunlukProgramAciklamasi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.GunlukProgramAciklamasi, new { @class = "form-control", placeholder = "Program Açıklaması" })
+                            @Html.ValidationMessageFor(model => model.GunlukProgramAciklamasi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.Etkin)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px">
+                <div class="col-lg-12 col-md-12">
+                    <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

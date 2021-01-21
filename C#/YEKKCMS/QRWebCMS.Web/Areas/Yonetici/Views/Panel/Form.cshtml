@@ -1,0 +1,83 @@
+﻿@model QRWebCMS.Web.Models.Form
+
+@{
+    ViewBag.Title = "Form";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Form Detay</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Panel</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Formlar">Formlar</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Form Detay</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Form</h5>
+    </div>
+    <div class="card-block table-border-style">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AdSoyad)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AdSoyad)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EPosta)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EPosta)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Konu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Konu)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MesajIcerigi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MesajIcerigi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GonderimTarihi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GonderimTarihi)
+            </dd>
+        </dl>
+        @Html.ActionLink("Listeye Dön", "Formlar", null, new { @class = "btn btn-primary btn-block" })
+    </div>
+</div>

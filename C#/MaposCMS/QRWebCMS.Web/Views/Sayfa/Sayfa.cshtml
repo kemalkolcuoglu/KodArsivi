@@ -1,0 +1,313 @@
+﻿@model QRWebCMS.Web.Models.EkModel.SayfaListeMV
+@{
+    ViewBag.Title = Model.Sayfa.Baslik;
+
+}
+
+<div class="breadcrumbs-v3 img-v3 text-center">
+    <div class="container">
+        <h1>@Model.Sayfa.Baslik</h1>
+    </div>
+</div>
+
+@if (Model.Sayfa.EkAlan1 == "Ozel Sayfa")
+{
+
+    foreach (var item in Model.SayfaListe)
+    {
+        if (item.NitelikTablosu == "Icerik")
+        {
+            QRWebCMS.Web.Models.Icerik icerik = Model.Icerikler.Find(x => x.IcerikID == item.NitelikID);
+
+            if (icerik != null)
+            {
+                if (icerik.EkAlan1 == "OzelSayfa")
+                {
+                    <div>
+                        @Html.Raw(icerik.EkAlan2)
+                    </div>
+                }
+                else
+                {
+                    <div class="col-4">
+                        <img src="../../@icerik.Gorsel" />
+                    </div>
+                    <div class="col-8">
+                        @Html.Raw(icerik.Detay)
+                    </div>
+                }
+
+            }
+        }
+        if (item.NitelikTablosu == "SlideKategori")
+        {
+            QRWebCMS.Web.Models.SlideKategori slideKategorisi = Model.Slidelar.Find(x => x.SlideKategoriID == item.NitelikID);
+            List<QRWebCMS.Web.Models.Slide> slidelar = QRWebCMS.Web.App_Start.Tanimlamalar.slideIslemleri.VeriGetir("SlideKategoriID = " + slideKategorisi.SlideKategoriID);
+
+            if (slidelar.Count > 0)
+            {
+                if (slideKategorisi.Tur == "Slider")
+                {
+                    <div class="z-index-1 appear-animation" data-appear-animation="fadeInDownShorter" data-appear-animation-delay="500">
+                        <div class="owl-carousel owl-theme full-width owl-loaded owl-drag owl-carousel-init m-0 mb-4" data-plugin-options="{'items': 1, 'loop': true, 'nav': true, 'dots': false, 'animateOut': 'fadeOut'}">
+                            @foreach (var slide in slidelar)
+                            {
+                                <div>
+                                    <img src="../../@slide.Gorsel" class="img-fluid" alt="">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else if (slideKategorisi.Tur == "Carousel")
+                {
+                    <div class="row text-center mt-5 pb-5 mb-5">
+                        <div class="owl-carousel owl-theme carousel-center-active-item mb-0" data-plugin-options="{'responsive': {'0': {'items': 1}, '476': {'items': 1}, '768': {'items': 5}, '992': {'items': 7}, '1200': {'items': 7}}, 'autoplay': true, 'autoplayTimeout': 3000, 'dots': false}">
+                            @foreach (var slide in slidelar)
+                            {
+                                <div>
+                                    <img class="img-fluid" src="../../@slide.Gorsel" alt="">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+        if (item.NitelikTablosu == "GaleriKategori")
+        {
+            QRWebCMS.Web.Models.GaleriKategori galeriKategori = Model.Galeriler.Find(x => x.GaleriKategoriID == item.NitelikID);
+            List<QRWebCMS.Web.Models.Galeri> galeriler = QRWebCMS.Web.App_Start.Tanimlamalar.galeriIslemleri.VeriGetir("GaleriKategoriID = " + galeriKategori.GaleriKategoriID);
+
+            if (galeriler.Count > 0)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="my-4 lightbox appear-animation" data-appear-animation="fadeInUpShorter" data-plugin-options="{'delegate': 'a.lightbox-portfolio', 'type': 'image', 'gallery': {'enabled': true}}">
+                            <div class="owl-carousel owl-theme pb-3" data-plugin-options="{'items': 4, 'margin': 35, 'loop': false}">
+                                @foreach (var galeri in galeriler)
+                                {
+                                    <div class="portfolio-item">
+                                        <span class="thumb-info thumb-info-lighten thumb-info-no-borders thumb-info-bottom-info thumb-info-centered-icons border-radius-0">
+                                            <span class="thumb-info-wrapper border-radius-0">
+                                                <img src="../../@galeri.Gorsel" class="img-fluid border-radius-0" alt="">
+                                                <span class="thumb-info-title">
+                                                    <span class="thumb-info-inner line-height-1 font-weight-bold text-dark position-relative top-3">@galeri.Baslik</span>
+                                                </span>
+                                                <span class="thumb-info-action">
+                                                    <a href="../../@galeri.Gorsel" class="lightbox-portfolio">
+                                                        <span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fas fa-search text-dark"></i></span>
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <hr class="solid my-5">
+                    </div>
+                </div>
+            }
+        }
+        if (item.NitelikTablosu == "UrunKategori")
+        {
+            QRWebCMS.Web.Models.UrunKategori urunKategori = Model.Urunler.Find(x => x.UrunKategoriID == item.NitelikID);
+            List<QRWebCMS.Web.Models.Urun> urunler = QRWebCMS.Web.App_Start.Tanimlamalar.urunIslemleri.VeriGetir("Vitrin = 1 And UrunKategoriID = " + urunKategori.UrunKategoriID);
+
+            <div class="row">
+                <div class="masonry-loader masonry-loader-showing">
+                    <div class="row products product-thumb-info-list" data-plugin-masonry data-plugin-options="{'layoutMode': 'fitRows'}">
+                        @foreach (var urun in urunler)
+                        {
+                            <div class="col-12 col-sm-6 col-lg-3 product">
+                                <span class="product-thumb-info border-0">
+                                    <a href="~/Sayfa/UrunDetay/@urun.UrunID" class="add-to-cart-product bg-color-primary" style="color:white">
+                                        <span class="text-uppercase text-1">Ürün Detayları</span>
+                                    </a>
+                                    <a href="~/Sayfa/UrunDetay/@urun.UrunID">
+                                        <span class="product-thumb-info-image">
+                                            <img alt="" class="img-fluid" src="../../@urun.Gorsel">
+                                        </span>
+                                    </a>
+                                    <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                        <a href="~/Sayfa/UrunDetay/@urun.UrunID">
+                                            <h4 class="text-4 text-primary">@urun.Baslik</h4>
+                                            <span class="price">
+                                                <span class="amount text-dark font-weight-semibold">@urun.Ucret TL</span>
+                                            </span>
+                                        </a>
+                                    </span>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+else
+{
+    <div class="container py-2">
+        <div class="row">
+            <div class="col">
+                @foreach (var item in Model.SayfaListe)
+                {
+                    if (item.NitelikTablosu == "Icerik")
+                    {
+                        QRWebCMS.Web.Models.Icerik icerik = Model.Icerikler.Find(x => x.IcerikID == item.NitelikID);
+
+                        if (icerik != null)
+                        {
+                            <div class="container content">
+                                @if (icerik.EkAlan1 == "OzelSayfa")
+                                {
+                                    @Html.Raw(icerik.EkAlan2)
+                                }
+                                else
+                                {
+                                    <div class="headline"><h2>@icerik.Baslik</h2></div>
+                                    <div class="text-center">
+                                        @if (icerik.Gorsel != null && icerik.Gorsel != "")
+                                        {
+                                            <img src="~/@icerik.Gorsel" />
+                                        }
+                                    </div>
+                                    <br /><br />
+                                    @Html.Raw(icerik.Detay)
+                                }
+                            </div>
+                        }
+                    }
+                    if (item.NitelikTablosu == "SlideKategori")
+                    {
+                        QRWebCMS.Web.Models.SlideKategori slideKategorisi = Model.Slidelar.Find(x => x.SlideKategoriID == item.NitelikID);
+                        List<QRWebCMS.Web.Models.Slide> slidelar = QRWebCMS.Web.App_Start.Tanimlamalar.slideIslemleri.VeriGetir("SlideKategoriID = " + slideKategorisi.SlideKategoriID);
+
+                        if (slidelar.Count > 0)
+                        {
+                            <div class="container content">
+                                <div class="row">
+                                    @if (slideKategorisi.Tur == "Slider")
+                                    {
+                                        <div class="carousel slide carousel-v1 margin-bottom-40" id="portfolio-carousel">
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                    <img class="full-width img-responsive" src="~/@slidelar[0].Gorsel" alt="">
+                                                    <div class="carousel-caption">
+                                                        <p>@slidelar[0].Baslik</p>
+                                                    </div>
+                                                </div>
+                                                @for (int i = 1; i < slidelar.Count; i++)
+                                                {
+                                                    <div class="item">
+                                                        <img class="full-width img-responsive" src="~/@slidelar[i].Gorsel" alt="">
+                                                        <div class="carousel-caption">
+                                                            <p>@slidelar[i].Baslik</p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="carousel-arrow">
+                                                <a class="left carousel-control rounded-x" href="#portfolio-carousel" role="button" data-slide="prev">
+                                                    <i class="fa fa-angle-left arrow-prev"></i>
+                                                </a>
+                                                <a class="right carousel-control rounded-x" href="#portfolio-carousel" role="button" data-slide="next">
+                                                    <i class="fa fa-angle-right arrow-next"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (slideKategorisi.Tur == "Carousel")
+                                    {
+                                        <div class="owl-carousel-style-v2 margin-bottom-50">
+                                            <div class="owl-slider-v3">
+                                                @foreach (var slide in slidelar)
+                                                {
+                                                    <div class="item">
+                                                        <img class="img-responsive" src="~/@slide.Gorsel">
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                    if (item.NitelikTablosu == "GaleriKategori")
+                    {
+                        QRWebCMS.Web.Models.GaleriKategori galeriKategori = Model.Galeriler.Find(x => x.GaleriKategoriID == item.NitelikID);
+                        List<QRWebCMS.Web.Models.Galeri> galeriler = QRWebCMS.Web.App_Start.Tanimlamalar.galeriIslemleri.VeriGetir("GaleriKategoriID = " + galeriKategori.GaleriKategoriID);
+
+                        if (galeriler.Count > 0)
+                        {
+                            <div class="container content">
+                                <div class="cube-portfolio container margin-bottom-60">
+                                    <div id="grid-container" class="cbp-l-grid-agency">
+                                        @foreach (var galeri in galeriler)
+                                        {
+                                            <div class="cbp-item graphic">
+                                                <div class="cbp-caption">
+                                                    <div class="cbp-caption-defaultWrap">
+                                                        <img src="~/@galeri.Gorsel" alt="">
+                                                    </div>
+                                                    <div class="cbp-caption-activeWrap">
+                                                        <div class="cbp-l-caption-alignCenter">
+                                                            <div class="cbp-l-caption-body">
+                                                                <ul class="link-captions">
+                                                                    <li><a href="~/@galeri.Gorsel" class="cbp-lightbox" data-title="Design Object"><i class="rounded-x fa fa-search"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    if (item.NitelikTablosu == "UrunKategori")
+                    {
+                        QRWebCMS.Web.Models.UrunKategori urunKategori = Model.Urunler.Find(x => x.UrunKategoriID == item.NitelikID);
+                        List<QRWebCMS.Web.Models.Urun> urunler = QRWebCMS.Web.App_Start.Tanimlamalar.urunIslemleri.VeriGetir("Vitrin = 1 And UrunKategoriID = " + urunKategori.UrunKategoriID);
+
+                        <div class="container content">
+                            <div class="masonry-loader masonry-loader-showing">
+                                <div class="row products product-thumb-info-list" data-plugin-masonry data-plugin-options="{'layoutMode': 'fitRows'}">
+                                    @foreach (var urun in urunler)
+                                    {
+                                        <div class="col-12 col-sm-6 col-lg-3 product">
+                                            <span class="product-thumb-info border-0">
+                                                <a href="~/Sayfa/UrunDetay/@urun.UrunID" class="add-to-cart-product bg-color-primary" style="color:white">
+                                                    <span class="text-uppercase text-1">Ürün Detayları</span>
+                                                </a>
+                                                <a href="~/Sayfa/UrunDetay/@urun.UrunID">
+                                                    <span class="product-thumb-info-image">
+                                                        <img alt="" class="img-fluid" src="~/@urun.Gorsel">
+                                                    </span>
+                                                </a>
+                                                <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                                    <a href="~/Sayfa/UrunDetay/@urun.UrunID">
+                                                        <h4 class="text-4 text-primary">@urun.Baslik</h4>
+                                                        <span class="price">
+                                                            <span class="amount text-dark font-weight-semibold">@urun.Ucret TL</span>
+                                                        </span>
+                                                    </a>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+

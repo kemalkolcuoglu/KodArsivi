@@ -1,0 +1,16 @@
+﻿@model List<QRGKBS.Varlik.Kisi>
+@{
+    ViewBag.Title = "Anasayfa";
+}
+
+<h2>Anasayfa</h2>
+
+<div>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@(item.Ad + " " + item.Soyad)</li>
+        }
+    </ul>
+</div>
+

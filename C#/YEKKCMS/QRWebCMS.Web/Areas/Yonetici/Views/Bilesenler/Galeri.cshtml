@@ -1,0 +1,133 @@
+﻿@model List<QRWebCMS.Web.Models.Galeri>
+@{
+    ViewBag.Title = "Galeri";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+
+    var kategori = ViewData["Kategori"] as SelectList;
+    bool durum = ViewBag.Durum ?? false;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Galeriler</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Galeri</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Galeri Kategorisi</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm("Galeri", "Bilesenler", FormMethod.Get))
+        {
+            <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @Html.Label("Galeri Kategorisi", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("id", kategori, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Veri Getir" class="btn btn-info btn-block" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if(durum)
+{
+    <div class="card">
+        <div class="card-header">
+            <h5>Galeri Listesi</h5>
+            <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#galeriEkle"><i class="fa fa-plus"></i> Galeri Ekle</button>
+            <div class="modal fade" id="galeriEkle" tabindex="-1" role="dialog">
+                @Html.Action("GaleriEkle", "Bilesenler")
+            </div>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Etkin</th>
+                            <th>Görsel</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int galeriSayisi = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(galeriSayisi++)</th>
+                                <td>@item.Baslik</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td><img src="../../../@item.Gorsel" style="width:10%" /></td>
+                                <td>
+                                    @*<button type="button" class="btn btn-inverse btn-sm waves-effect" data-toggle="modal" data-target="#galeriDuzenle"><i class="fa fa-edit"></i></button>
+                                    <div class="modal fade" id="galeriDuzenle" tabindex="-1" role="dialog">
+                                        @Html.Action("GaleriDuzenle", "Bilesenler", new { id = item.GaleriID })
+                                    </div>*@
+                                    <a href="~/Yonetici/Bilesenler/GaleriDuzenle/@item.GaleriID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#galeriSil"><i class="fas fa-times"></i></button>
+                                    <div class="modal fade" id="galeriSil" tabindex="-1" role="dialog">
+                                        @using (Html.BeginForm("GaleriSil", "Bilesenler", new { id = item.GaleriID }, FormMethod.Post))
+                                        {
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Galeri Sil</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @Html.AntiForgeryToken()
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <p>Seçmiş olduğunuz Galeri silinecektir. Silmek istediğinize emin misiniz?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-times"></i> İptal</button>
+                                                        <button type="submit" class="btn btn-danger waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+

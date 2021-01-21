@@ -1,0 +1,109 @@
+﻿@model List<QRWebCMS.Web.Models.Sayfa>
+@{
+    ViewBag.Title = "Sayfa";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+
+    var SayfaListe = ViewData["SayfaListe"] as List<QRWebCMS.Web.Models.SayfaListe> ?? new List<QRWebCMS.Web.Models.SayfaListe>();
+
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Sayfalar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Sayfalar</h5>
+        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#sayfaEkle"><i class="fa fa-plus"></i> Sayfa Ekle</button>
+        <div class="modal fade" id="sayfaEkle" tabindex="-1" role="dialog">
+            @Html.Action("SayfaEkle", "Bilesenler")
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Etkin</th>
+                        <th>İkon</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sayfaSayisi = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@(sayfaSayisi++)</th>
+                            <td>@item.Baslik</td>
+                            <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                            @if (item.Ikon != null)
+                            {
+                                <td><i class="@item.Ikon"></i></td>
+                            }
+                            else
+                            {
+                                <td>Yok</td>
+                            }
+                            <td>
+                                <a href="~/Yonetici/Bilesenler/SayfaDuzenle/@item.SayfaID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#sayfaSil"><i class="fas fa-times"></i></button>
+                                <div class="modal fade" id="sayfaSil" tabindex="-1" role="dialog">
+                                    @using (Html.BeginForm("SayfaSil", "Bilesenler", new { id = item.SayfaID }, FormMethod.Post))
+                                    {
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Sayfa Sil</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @Html.AntiForgeryToken()
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <p>Seçmiş olduğunuz Sayfa silinecektir. Silmek istediğinize emin misiniz?</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-times"></i> İptal</button>
+                                                    <button type="submit" class="btn btn-danger waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <a href="~/Yonetici/Bilesenler/SayfaIcerik/@item.SayfaID" class="btn btn-info btn-sm"><i class="fa fa-ellipsis-v"></i></a>
+                                <a href="~/Yonetici/Bilesenler/SayfaDuzeni/@item.SayfaID" class="btn btn-info btn-sm"><i class="fas fa-align-justify"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

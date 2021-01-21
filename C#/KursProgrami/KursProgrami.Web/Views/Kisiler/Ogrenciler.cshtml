@@ -1,0 +1,150 @@
+﻿@model List<KursProgrami.Model.Ogrenci>
+@{
+                /**/
+
+                ViewBag.Title = "Ögrenciler";
+                var durum = ViewData["Durum"] as SelectList;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Öğrenciler</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kişiler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Öğrenciler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Öğrenci Filtrele</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm("OgrenciFiltre", "Kisiler", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.Editor("TCKNO", new { htmlAttributes = new { @class = "form-control", placeholder = "T.C. Kimlik No." } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.DropDownList("Durum", durum, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.Editor("Ad", new { htmlAttributes = new { @class = "form-control", placeholder = "Ad" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.Editor("Soyad", new { htmlAttributes = new { @class = "form-control", placeholder = "Soyad" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Öğrenci Listesi</h5>
+        <a href="~/Kisiler/OgrenciEkle" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-plus"></i> Öğrenci Ekle</a>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>T.C. Kimlik No.</th>
+                        <th>Ad Soyad</th>
+                        <th>Cinsiyet</th>
+                        <th>Doğum Tarihi</th>
+                        <th>Sinif</th>
+                        <th>Telefon</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Etkin)
+                        {
+                            <tr>
+                                <td>@item.TCKNO</td>
+                                <td>@(item.Ad + " " + item.Soyad)</td>
+                                <td>@item.Cinsiyet</td>
+                                <td>@item.DogumTarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@item.SinifAdi</td>
+                                <td>@item.Telefon1</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/Kisiler/OgrenciDuzenle/@item.OgrenciID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#icerikSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="table-danger">
+                                <td>@item.TCKNO</td>
+                                <td>@(item.Ad + " " + item.Soyad)</td>
+                                <td>@item.Cinsiyet</td>
+                                <td>@item.DogumTarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@item.SinifAdi</td>
+                                <td>@item.Telefon1</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/Kisiler/OgrenciDuzenle/@item.OgrenciID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#icerikSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Content
+{
+}
+
+@section Scripts
+{
+}

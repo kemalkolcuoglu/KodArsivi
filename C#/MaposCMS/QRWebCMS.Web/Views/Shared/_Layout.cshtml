@@ -1,0 +1,150 @@
+﻿@using System.Web.Optimization;
+@{
+    QRWebCMS.Web.Islemler.EkIslemler.MenuListeIslemleri mli = QRWebCMS.Web.App_Start.Tanimlamalar.menuListeIslemleri;
+    QRWebCMS.Web.Islemler.TemelIslemler<QRWebCMS.Web.Models.SosyalMedya> smi = QRWebCMS.Web.App_Start.Tanimlamalar.sosyalMedyaIslemleri;
+    QRWebCMS.Web.Islemler.TemelIslemler<QRWebCMS.Web.Models.GenelAyarlar> ga = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri;
+
+    List<QRWebCMS.Web.Models.MenuListe> menuListe = mli.VeriGetirSQL("Select * From vMenuListe Order By MenuGoruntulemeSirasi");
+    List<QRWebCMS.Web.Models.SosyalMedya> sosyalMedyaListe = smi.VeriGetir("1 = 1");
+    QRWebCMS.Web.Models.GenelAyarlar genelAyarlar = ga.Bul("GenelAyarlarID = 1") ?? new QRWebCMS.Web.Models.GenelAyarlar();
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>@genelAyarlar.Logo - @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="QR Yazılım">
+    @*<link rel="shortcut icon" href="favicon.ico">*@
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+    <link rel="stylesheet" href="~/Plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/headers/header-default.css">
+    <link rel="stylesheet" href="~/Content/footers/footer-v1.css">
+    <link rel="stylesheet" href="~/Plugins/animate.css">
+    <link rel="stylesheet" href="~/Plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="~/Plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Plugins/fancybox/source/jquery.fancybox.css">
+    <link rel="stylesheet" href="~/Plugins/parallax-slider/css/parallax-slider.css">
+    <link rel="stylesheet" href="~/Plugins/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/Plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="~/Plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+    <link rel="stylesheet" href="~/Content/theme-colors/orange.css" id="style_color">
+    <link rel="stylesheet" href="~/Content/theme-skins/dark.css">
+    <link rel="stylesheet" href="~/Content/custom.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="container">
+                @*<div class="row">
+                        <div>
+                            <h5><span><i class="fa fa-phone">@genelAyarlar.Telefon</i></span> </h5>
+                            <h5><span><i class="fa fa-mail">@genelAyarlar.EPosta</i></span> </h5>
+                        </div>
+                    </div>*@
+                <div class="row">
+                    <a class="logo" href="~/Ev/Anasayfa">
+                        <img src="~/Images/MAPOS.png" style="width:25%" alt="MAPOS ÇAMUR POMPASI">
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Menü</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <li><a href="~/Ev/Anasayfa">ANASAYFA</a></li>
+                        <li><a href="~/Sayfa/Sayfa/6">HAKKIMIZDA</a></li>
+                        <li><a href="~/Ev/Iletisim">İLETİŞİM</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+
+        <div class="footer-v1">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 md-margin-bottom-40">
+                            <a href="~/Ev/Anasayfa"><img id="logo-footer" class="footer-logo" src="" alt=""></a>
+                            <img style="width:80%" src="~/Images/MAPOS.png" />
+                        </div>
+
+                        <div class="col-md-6 map-img md-margin-bottom-40">
+                            <div class="headline"><h2>Bize Ulaşın</h2></div>
+                            <address class="md-margin-bottom-40">
+                                @genelAyarlar.Adres
+                                <br />
+                                Telefon: <a href="#">@genelAyarlar.Telefon</a>
+                                <br />
+                                E-Posta: <a href="mailto:@genelAyarlar.EPosta" class="">@genelAyarlar.EPosta</a>
+                            </address>
+                            <img style="width:30%" src="~/Images/Resim1.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <a href="http://www.qryazilim.com" target="_blank"><img src="~/Images/qryazilim_beyaz.png" width="25%" /></a>
+                                2016 &copy; Bütün Hakları Saklıdır.
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="footer-socials list-inline">
+                                <li>
+                                    @foreach (var item in sosyalMedyaListe)
+                                    {
+                                        <a href="@item.Link" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="@item.Baslik">
+                                            <i class="@item.Ikon"></i>
+                                        </a>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/Plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="~/Plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Plugins/back-to-top.js"></script>
+    <script type="text/javascript" src="~/Plugins/smoothScroll.js"></script>
+    <script type="text/javascript" src="~/Plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script type="text/javascript" src="~/Plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="~/Plugins/parallax-slider/js/modernizr.js"></script>
+    <script type="text/javascript" src="~/Plugins/parallax-slider/js/jquery.cslider.js"></script>
+    <script type="text/javascript" src="~/Plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/Scripts/custom.js"></script>
+    <script type="text/javascript" src="~/Scripts/app.js"></script>
+    <script type="text/javascript" src="~/Scripts/plugins/cube-portfolio/cube-portfolio-4.js"></script>
+    <script type="text/javascript" src="~/Scripts/plugins/owl-carousel.js"></script>
+    <script type="text/javascript" src="~/Scripts/plugins/style-switcher.js"></script>
+    <script type="text/javascript" src="~/Scripts/plugins/parallax-slider.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            App.init();
+            FancyBox.initFancybox();
+            OwlCarousel.initOwlCarousel();
+            StyleSwitcher.initStyleSwitcher();
+            ParallaxSlider.initParallaxSlider();
+        });
+    </script>
+
+    @RenderSection("Script", false)
+</body>
+</html>

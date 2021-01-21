@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+    List<QRWebCMS.Web.Models.GaleriKategori> galeriKategori;
+    List<QRWebCMS.Web.Models.SlideKategori> slideKategori;
+    List<QRWebCMS.Web.Models.UrunKategori> urunKategori;
+
+    if (ViewData["GaleriKategorileri"] != null)
+    {
+        galeriKategori = ViewData["GaleriKategorileri"] as List<QRWebCMS.Web.Models.GaleriKategori>;
+    }
+    else
+    {
+        galeriKategori = new List<QRWebCMS.Web.Models.GaleriKategori>();
+    }
+    if (ViewData["SlideKategorileri"] != null)
+    {
+        slideKategori = ViewData["SlideKategorileri"] as List<QRWebCMS.Web.Models.SlideKategori>;
+    }
+    else
+    {
+        slideKategori = new List<QRWebCMS.Web.Models.SlideKategori>();
+    }
+    if (ViewData["UrunKategorileri"] != null)
+    {
+        urunKategori = ViewData["UrunKategorileri"] as List<QRWebCMS.Web.Models.UrunKategori>;
+    }
+    else
+    {
+        urunKategori = new List<QRWebCMS.Web.Models.UrunKategori>();
+    }
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Sayfalar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Sayfa">Sayfa</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Anasayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Galeri Kategori</h5>
+        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#galeriKategoriEkle"><i class="fa fa-plus"></i> Galeri Kategori Ekle</button>
+        <div class="modal fade" id="galeriKategoriEkle" tabindex="-1" role="dialog">
+            @Html.Action("GaleriKategoriEkle", "Kategoriler")
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int galeriSayisi = 1; }
+                    @foreach (var item in galeriKategori)
+                    {
+                        <tr>
+                            <th scope="row">@(galeriSayisi++)</th>
+                            <td>@item.Baslik</td>
+                            <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                            <td>
+                                <button type="button" class="btn btn-inverse btn-sm waves-effect" data-toggle="modal" data-target="#galeriKategoriDuzenle"><i class="fa fa-edit"></i></button>
+                                <div class="modal fade" id="galeriKategoriDuzenle" tabindex="-1" role="dialog">
+                                    @Html.Action("GaleriKategoriDuzenle", "Kategoriler", new { id = item.GaleriKategoriID })
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#galeriKategoriSil"><i class="fas fa-times"></i></button>
+                                <div class="modal fade" id="galeriKategoriSil" tabindex="-1" role="dialog">
+                                    @Html.Action("GaleriKategoriSil", "Kategoriler", new { id = item.GaleriKategoriID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Slide Kategori</h5>
+        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#slideKategoriEkle"><i class="fa fa-plus"></i> Slide Kategori Ekle</button>
+        <div class="modal fade" id="slideKategoriEkle" tabindex="-1" role="dialog">
+            @Html.Action("SlideKategoriEkle", "Kategoriler")
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Tipi</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int slideSayisi = 1; }
+                    @foreach (var item in slideKategori)
+                    {
+                        <tr>
+                            <th scope="row">@(slideSayisi++)</th>
+                            <td>@item.Baslik</td>
+                            <td>@item.Tur</td>
+                            <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                            <td>
+                                <button type="button" class="btn btn-inverse btn-sm waves-effect" data-toggle="modal" data-target="#slideKategoriDuzenle"><i class="fa fa-edit"></i></button>
+                                <div class="modal fade" id="slideKategoriDuzenle" tabindex="-1" role="dialog">
+                                    @Html.Action("SlideKategoriDuzenle", "Kategoriler", new { id = item.SlideKategoriID })
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#slideKategoriSil"><i class="fas fa-times"></i></button>
+                                <div class="modal fade" id="slideKategoriSil" tabindex="-1" role="dialog">
+                                    @Html.Action("SlideKategoriSil", "Kategoriler", new { id = item.SlideKategoriID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Ürün Kategori</h5>
+        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#urunKategoriEkle"><i class="fa fa-plus"></i> Ürün Kategori Ekle</button>
+        <div class="modal fade" id="urunKategoriEkle" tabindex="-1" role="dialog">
+            @Html.Action("UrunKategoriEkle", "Kategoriler")
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int urunSayisi = 1; }
+                    @foreach (var item in urunKategori)
+                    {
+                        <tr>
+                            <th scope="row">@(urunSayisi++)</th>
+                            <td>@item.Baslik</td>
+                            <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                            <td>
+                                <button type="button" class="btn btn-inverse btn-sm waves-effect" data-toggle="modal" data-target="#urunKategoriDuzenle"><i class="fa fa-edit"></i></button>
+                                <div class="modal fade" id="urunKategoriDuzenle" tabindex="-1" role="dialog">
+                                    @Html.Action("UrunKategoriDuzenle", "Kategoriler", new { id = item.UrunKategoriID })
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#urunKategoriSil"><i class="fas fa-times"></i></button>
+                                <div class="modal fade" id="urunKategoriSil" tabindex="-1" role="dialog">
+                                    @Html.Action("UrunKategoriSil", "Kategoriler", new { id = item.UrunKategoriID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

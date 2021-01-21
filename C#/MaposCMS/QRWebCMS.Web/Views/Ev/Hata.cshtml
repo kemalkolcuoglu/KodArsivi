@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Hata";
+    QRWebCMS.Web.Models.GenelAyarlar ga = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri.Bul("1 = 1");
+    List<QRWebCMS.Web.Models.SosyalMedya> sm = QRWebCMS.Web.App_Start.Tanimlamalar.sosyalMedyaIslemleri.VeriGetir("1 = 1");
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">HATA</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="~/Ev/Anasayfa">Anasayfa</a></li>
+            <li class="active">404 Error</li>
+        </ul>
+    </div>
+</div>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="error-v1">
+                <span class="error-v1-title">404</span>
+                <span>HATA OLUŞTU!</span>
+                <p>İşleminiz gerçekleştirilemedi. Lütfen tekrar deneyiniz.</p>
+                <a class="btn-u btn-bordered" href="~/Ev/Anasayfa">Anasayfa'ya Dön</a>
+            </div>
+        </div>
+    </div>
+</div>
+

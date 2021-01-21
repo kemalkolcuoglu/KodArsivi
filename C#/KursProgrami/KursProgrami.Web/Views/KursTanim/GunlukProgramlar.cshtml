@@ -1,0 +1,84 @@
+﻿@model List<KursProgrami.Model.GunlukProgram>
+@{
+    ViewBag.Title = "Gunlük Programlar";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Günlük Programlar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanım</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Günlük Programlar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Günlük Program Listesi</h5>
+        <a href="~/KursTanim/GunlukProgramEkle" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-plus"></i> Günlük Program Ekle</a>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Program Adı</th>
+                        <th>Program Açıklaması</th>
+                        <th>Düzenleme Tarihi</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Etkin)
+                        {
+                            <tr>
+                                <td>@item.GunlukProgramAdi</td>
+                                <td>@item.GunlukProgramAciklamasi</td>
+                                <td>@item.DuzenlemeTarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/KursTanim/SaatlikProgramlar/@item.GunlukProgramID" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-calendar"></i></a>
+                                    <a href="~/KursTanim/GunlukProgramDuzenle/@item.GunlukProgramID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#dersSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="table-danger">
+                                <td>@item.GunlukProgramAdi</td>
+                                <td>@item.GunlukProgramAciklamasi</td>
+                                <td>@item.DuzenlemeTarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/KursTanim/SaatlikProgramlar/@item.GunlukProgramID" class="btn btn-warning btn-sm waves-effect"><i class="fa fa-calendar"></i></a>
+                                    <a href="~/KursTanim/GunlukProgramDuzenle/@item.GunlukProgramID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#dersSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

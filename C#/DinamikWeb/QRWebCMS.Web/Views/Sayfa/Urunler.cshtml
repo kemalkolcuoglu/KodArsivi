@@ -1,0 +1,65 @@
+﻿@model List<QRWebCMS.Web.Models.Urun>
+@{
+    ViewBag.Title = "Ürünler";
+}
+
+<section class="page-header page-header-modern bg-color-dark page-header-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 order-2 order-md-1 align-self-center p-static">
+                <h1 class=""><strong>Ürünler</strong></h1>
+            </div>
+            <div class="col-md-4 order-1 order-md-2 align-self-center">
+                <ul class="breadcrumb d-block text-md-right breadcrumb-light">
+                    <li><a href="~/Ev/Anasayfa">Anasayfa</a></li>
+                    <li><a href="~/Sayfa/UrunKategorileri/@Model[0].UrunKategoriID">Ürün Kategorisi</a></li>
+                    <li class="active">Ürünler</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="masonry-loader masonry-loader-showing">
+        <div class="row products product-thumb-info-list" data-plugin-masonry data-plugin-options="{'layoutMode': 'fitRows'}">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-6 col-lg-3 product">
+                    <span class="product-thumb-info border-0">
+                        <a href="~/Sayfa/UrunDetay/@item.UrunID" class="add-to-cart-product bg-color-primary" style="color:white">
+                            <span class="text-uppercase text-1">Ürün Detayları</span>
+                        </a>
+                        <a href="~/Sayfa/UrunDetay/@item.UrunID">
+                            <span class="product-thumb-info-image">
+                                <img alt="" class="img-fluid" src="../../@item.Gorsel">
+                            </span>
+                        </a>
+                        <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                            <a href="~/Sayfa/UrunDetay/@item.UrunID">
+                                <h4 class="text-4 text-primary">@item.Baslik</h4>
+                                <span class="price">
+                                    @if (!String.IsNullOrEmpty(item.Ucret))
+                                    {
+                                        <span class="amount text-dark font-weight-semibold">@item.Ucret TL</span>
+                                    }
+                                </span>
+                            </a>
+                        </span>
+                    </span>
+                </div>
+            }
+        </div>
+        @*<div class="row">
+                <div class="col">
+                    <ul class="pagination float-right">
+                        <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
+                    </ul>
+                </div>
+            </div>*@
+    </div>
+</div>

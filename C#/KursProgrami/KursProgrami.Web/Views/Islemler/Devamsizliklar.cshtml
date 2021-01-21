@@ -1,0 +1,59 @@
+﻿@model List<KursProgrami.Model.Sinif>
+@{
+    ViewBag.Title = "Devamsızlıklar";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Devamsızlıklar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">İşlemler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Devamsızlıklar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Sınıf Listesi</h5>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sınıf Adı</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.SinifAdi</td>
+                            <td>
+                                <a href="~/Islemler/DevamsizlikListesi/@item.SinifID" class="btn btn-inverse waves-effect">Devamsızlık Takibi</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

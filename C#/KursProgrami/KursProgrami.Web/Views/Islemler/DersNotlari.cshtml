@@ -1,0 +1,107 @@
+﻿@model Dictionary<string, string>
+@{
+    ViewBag.Title = "Ders Notları";
+    var ogrenciler = ViewData["ogrenciler"] as List<KursProgrami.Model.OgrenciKursSinif>;
+    var program = ViewData["program"] as List<KursProgrami.Model.SaatlikProgram>;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Ders Notları Takibi</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">İşlemler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/Islemler/Devamsizliklar">Ders Notları</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Öğrenci Filtrele</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm("DersNotTakip", "Islemler", new { id = ogrenciler[0].SinifID }, FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.Editor("tarih", new { htmlAttributes = new { @class = "form-control", placeholder = "Tarih", type = "date" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Sınıf İşlemleri</h5>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            @using (Html.BeginForm("DersNotlari", "Islemler", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Öğrenci Adı</th>
+                            @foreach (var item in program)
+                            {
+                                <th>@item.ProgramAdi</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ogrenciler)
+                        {
+                            <tr>
+                                <td>@(item.OgrenciAdi + " " + item.OgrenciSoyadi)</td>
+                                @for (int i = 0; i < program.Count; i++)
+                                {
+                                    if (Model.Keys.Contains($"{item.OgrenciID}_{program[i].SaatlikProgramID}") && !String.IsNullOrEmpty(Model[$"{item.OgrenciID}_{program[i].SaatlikProgramID}"]))
+                                    {
+                                        <td>
+                                            @Html.TextBox($"model[{item.OgrenciID}_{program[i].SaatlikProgramID}]", Model[$"{item.OgrenciID}_{program[i].SaatlikProgramID}"], new { @class = "form-control form-control-info", placeholder = "Not Giriniz" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.TextBox($"model[{item.OgrenciID}_{program[i].SaatlikProgramID}]", null, new { @class = "form-control form-control-warning", placeholder = "Not Giriniz" })
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+            }
+        </div>
+    </div>
+</div>

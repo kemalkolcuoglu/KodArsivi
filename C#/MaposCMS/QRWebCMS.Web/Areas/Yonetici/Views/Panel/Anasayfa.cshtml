@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+
+    int icerikSayisi = QRWebCMS.Web.App_Start.Tanimlamalar.icerikIslemleri.VeriSayisi();
+    int galeriSayisi = QRWebCMS.Web.App_Start.Tanimlamalar.galeriIslemleri.VeriSayisi();
+    int slideSayisi = QRWebCMS.Web.App_Start.Tanimlamalar.slideIslemleri.VeriSayisi();
+    int urunSayisi = QRWebCMS.Web.App_Start.Tanimlamalar.urunIslemleri.VeriSayisi();
+    List<QRWebCMS.Web.Models.Form> gelenForm = QRWebCMS.Web.App_Start.Tanimlamalar.formIslemleri.VeriGetir("1 = 1 ORDER BY FormID DESC Limit 5");
+    List<QRWebCMS.Web.Models.Sayac> sayac = QRWebCMS.Web.App_Start.Tanimlamalar.sayacIslemleri.VeriGetir("1 = 1 ORDER BY Sayi DESC Limit 5");
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Panel</h5>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Anasayfa</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-blue web-num-card">
+                            <div class="card-block text-white">
+                                <h5 class="m-t-15">İçerik</h5>
+                                <h3 class="m-b-15">@icerikSayisi</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-green web-num-card">
+                            <div class="card-block text-white">
+                                <h5 class="m-t-15">Slide</h5>
+                                <h3 class="m-b-15">@slideSayisi</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-red web-num-card">
+                            <div class="card-block text-white">
+                                <h5 class="m-t-15">Galeri</h5>
+                                <h3 class="m-b-15">@galeriSayisi</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card o-hidden bg-c-yellow web-num-card">
+                            <div class="card-block text-white">
+                                <h5 class="m-t-15">Ürün</h5>
+                                <h3 class="m-b-15">@urunSayisi</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card amount-close-card">
+                            <div class="card-header">
+                                <h5>En Çok Ziyaret Edilen Sayfalar</h5>
+                            </div>
+                            <div class="card-block">
+                                @foreach (var item in sayac)
+                                {
+                                    <div class="row align-items-center m-b-15">
+                                    <div class="col-auto">
+                                        <h6 class="m-b-0 text-c-blue">@item.Sayfa</h6>
+                                    </div>
+                                    <div class="col text-right">
+                                        <p class="m-b-0">@(item.Sayi > 0 ? item.Sayi%100 : item.Sayi )%</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card table-card">
+                            <div class="card-header">
+                                <h5>En Son Gelen 5 Form</h5>
+                            </div>
+                            <div class="card-block p-b-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover m-b-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Ad Soyad</th>
+                                                <th>E-Posta</th>
+                                                <th>Konu</th>
+                                                <th>İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ int i = 1; }
+                                            @foreach (var item in gelenForm)
+                                            {
+                                                <tr>
+                                                    <td class="text-left">@(i++)</td>
+                                                    <td>@item.AdSoyad</td>
+                                                    <td>@item.EPosta</td>
+                                                    <td>@item.Konu</td>
+                                                    <td><a href="~/Yonetici/Panel/Form/@item.FormID" class="btn btn-info">Form Detayı</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

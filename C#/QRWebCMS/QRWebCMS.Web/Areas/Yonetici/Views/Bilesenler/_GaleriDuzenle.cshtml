@@ -1,0 +1,65 @@
+﻿@model QRWebCMS.Web.Models.Galeri
+
+@{
+    var kategori = ViewData["Kategori"] as SelectList;
+}
+
+@using (Html.BeginForm("GaleriDuzenle", "Bilesenler", FormMethod.Post))
+{
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Galeri Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GaleriKategoriID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.GaleriKategoriID, kategori, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Baslik, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Baslik, new { htmlAttributes = new { @class = "form-control", placeholder = "İçerik Başlığı" } })
+                            @Html.ValidationMessageFor(model => model.Baslik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Detay, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Detay, new { htmlAttributes = new { @class = "form-control", placeholder = "Detay" } })
+                            @Html.ValidationMessageFor(model => model.Detay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gorsel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Gorsel, new { htmlAttributes = new { @class = "form-control", placeholder = "Görsel" } })
+                            @Html.ValidationMessageFor(model => model.Gorsel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Etkin, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-close"></i> İptal</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+

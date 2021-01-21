@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Web CMS - @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="QRYAZILIM" />
+    <link rel="icon" href="~/Areas/Yonetici/Assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/bower_components/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/icon/feather/css/feather.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/css/font-awesome-n.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/css/component.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/css/widget.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/css/pages.css">
+
+    @RenderSection("Content", required: false)
+</head>
+<body>
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <nav class="navbar header-navbar pcoded-header" logo-theme="theme6">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo" logo-theme="theme6">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <img class="img-fluid" src="~/Areas/Yonetici/Assets/images/qryazilim_beyaz.png" style="width:80%" />
+                        </a>
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu"></i>
+                        </a>
+                        <a class="mobile-options waves-effect waves-light">
+                            <i class="feather icon-more-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-bell"></i>
+                                        <span class="badge bg-c-red">5</span>
+                                    </div>
+                                    <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <h6>Notifications</h6>
+                                            <label class="label label-danger">New</label>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">John Doe</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Joseph William</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Sara Soudein</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon feather icon-settings"></i>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li class="drp-u-details">
+                                            <span>Yönetici</span>
+                                            <a href="~/Yonetici/Panel/CikisYap" class="dud-logout" title="Çıkış Yap">
+                                                <i class="feather icon-log-out"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="nav-list">
+                            <div class="pcoded-inner-navbar main-menu">
+                                <div class="pcoded-navigation-label">Panel</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="~/Yonetici/Panel/Anasayfa" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-home"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Anasayfa</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Yonetici/Panel/GenelAyarlar" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-sliders"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Genel Ayarlar</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Yonetici/Panel/TeknikAyarlar" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-settings"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Teknik Ayarlar</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Yonetici/Panel/Formlar" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="far fa-copy"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Formlar</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Ev/CikisYap" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-log-out"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Çıkış Yap</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="pcoded-navigation-label">Site Öğeleri</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="~/Yonetici/Kategoriler/Anasayfa" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-command"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Kategoriler</span>
+                                        </a>
+                                    </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-menu"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Bileşenler</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Menu" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon">
+                                                        <i class="feather icon-layers"></i>
+                                                    </span>
+                                                    <span class="pcoded-mtext">Menü</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Sayfa" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Sayfa</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Icerik" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">İçerik</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Slide" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Slide</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Galeri" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Galeri</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/Urun" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Ürün</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Yonetici/Bilesenler/SosyalMedya" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Sosyal Medya</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Yonetici/Bilesenler/GorselEkle" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-upload-cloud"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Görsel Yükle</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <div class="page-body">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/pace.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/modernizr/js/modernizr.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/pages/waves/js/waves.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/pcoded.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/vertical/vertical-layout.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/script.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/script.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

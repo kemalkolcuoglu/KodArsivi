@@ -1,0 +1,31 @@
+﻿@model QRWebCMS.Web.Models.Icerik
+@{
+    ViewBag.Title = Model.Baslik; 
+}
+
+<section class="page-header page-header-modern bg-color-dark page-header-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 order-2 order-md-1 align-self-center p-static">
+                <h1 class=""><strong>@Model.Baslik</strong></h1>
+            </div>
+            <div class="col-md-4 order-1 order-md-2 align-self-center">
+                <ul class="breadcrumb d-block text-md-right breadcrumb-light">
+                    <li><a href="~/Ev/Anasayfa">Anasayfa</a></li>
+                    <li class="active">@Model.Baslik</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container py-2">
+    <div class="row">
+        <div class="col">
+            <h2 class="font-weight-normal text-7 mb-2"><strong class="font-weight-extra-bold">@Model.Baslik</strong></h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula.</p>
+            <img class="float-left img-fluid" width="300" height="211" src="@Model.Gorsel" >
+            @Html.Raw(Model.Detay)
+        </div>
+    </div>
+</div>

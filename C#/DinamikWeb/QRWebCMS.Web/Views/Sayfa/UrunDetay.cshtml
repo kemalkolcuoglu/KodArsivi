@@ -1,0 +1,192 @@
+﻿@model QRWebCMS.Web.Models.Urun
+@{
+    ViewBag.Title = Model.Baslik;
+}
+
+<section class="page-header page-header-modern bg-color-dark page-header-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 order-2 order-md-1 align-self-center p-static">
+                <h1 class=""><strong>@Model.Baslik</strong></h1>
+            </div>
+            <div class="col-md-4 order-1 order-md-2 align-self-center">
+                <ul class="breadcrumb d-block text-md-right breadcrumb-light">
+                    <li><a href="~/Ev/Anasayfa">Anasayfa</a></li>
+                    <li><a href="~/Sayfa/Urunler/@Model.UrunKategoriID">Ürün Kategorisi</a></li>
+                    <li class="active">@Model.Baslik</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mb-0 font-weight-bold text-7">@Model.Baslik</h1>
+            <div class="owl-carousel owl-theme" data-plugin-options="{'items': 1}">
+                <div>
+                    <img alt="" class="img-fluid" src="../../@Model.Gorsel">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="summary entry-summary">
+                @*<div title="Rated 5.00 out of 5" class="star-rating">
+                    <span style="width:100%"><strong class="rating">5.00</strong> out of 5</span>
+                </div>
+                <div class="review-num">
+                    <span class="count" itemprop="ratingCount">2</span> reviews
+                </div>*@
+                <p class="price">
+                    @if (!String.IsNullOrEmpty(Model.Ucret))
+                    {
+                        <span class="amount">@Model.Ucret TL</span>
+                    }
+                </p>
+                <p class="mb-4">@Model.EkAlan1</p>
+                @*<div class="product-meta">
+                    <span class="posted-in">Kategorisi: <a rel="tag" href="#">Accessories</a>, <a rel="tag" href="#">Bags</a>.</span>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="tabs tabs-product mb-2">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item active"><a class="nav-link py-3 px-4" href="#productDescription" data-toggle="tab">Ürün Detayları</a></li>
+                    @*<li class="nav-item"><a class="nav-link py-3 px-4" href="#productInfo" data-toggle="tab">Additional Information</a></li>*@
+                </ul>
+                <div class="tab-content p-0">
+                    <div class="tab-pane p-4 active" id="productDescription">
+                        @Html.Raw(Model.Detay)
+                    </div>
+                    @*<div class="tab-pane p-4" id="productInfo">
+                        <table class="table m-0">
+                            <tbody>
+                                <tr>
+                                    <th class="border-top-0">
+                                        Size:
+                                    </th>
+                                    <td class="border-top-0">
+                                        Unique
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Colors
+                                    </th>
+                                    <td>
+                                        Red, Blue
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Material
+                                    </th>
+                                    <td>
+                                        100% Leather
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">
+        <div class="col">
+            <hr class="solid my-5">
+            <h4 class="mb-3">Related <strong>Products</strong></h4>
+            <div class="masonry-loader masonry-loader-showing">
+                <div class="row products product-thumb-info-list mt-3" data-plugin-masonry data-plugin-options="{'layoutMode': 'fitRows'}">
+                    <div class="col-12 col-sm-6 col-lg-3 product">
+                        <span class="product-thumb-info border-0">
+                            <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                                <span class="text-uppercase text-1">Add to Cart</span>
+                            </a>
+                            <a href="shop-product-sidebar.html">
+                                <span class="product-thumb-info-image">
+                                    <img alt="" class="img-fluid" src="~/Assets/Image/products/product-grey-1.jpg">
+                                </span>
+                            </a>
+                            <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                <a href="shop-product-sidebar.html">
+                                    <h4 class="text-4 text-primary">Photo Camera</h4>
+                                    <span class="price">
+                                        <del><span class="amount">$325</span></del>
+                                        <ins><span class="amount text-dark font-weight-semibold">$299</span></ins>
+                                    </span>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 product">
+                        <span class="product-thumb-info border-0">
+                            <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                                <span class="text-uppercase text-1">Add to Cart</span>
+                            </a>
+                            <a href="shop-product-sidebar.html">
+                                <span class="product-thumb-info-image">
+                                    <img alt="" class="img-fluid" src="~/Assets/Image/products/product-grey-2.jpg">
+                                </span>
+                            </a>
+                            <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                <a href="shop-product-sidebar.html">
+                                    <h4 class="text-4 text-primary">Golf Bag</h4>
+                                    <span class="price">
+                                        <span class="amount text-dark font-weight-semibold">$72</span>
+                                    </span>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 product">
+                        <span class="product-thumb-info border-0">
+                            <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                                <span class="text-uppercase text-1">Add to Cart</span>
+                            </a>
+                            <a href="shop-product-sidebar.html">
+                                <span class="product-thumb-info-image">
+                                    <img alt="" class="img-fluid" src="~/Assets/Image/products/product-grey-3.jpg">
+                                </span>
+                            </a>
+                            <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                <a href="shop-product-sidebar.html">
+                                    <h4 class="text-4 text-primary">Workout</h4>
+                                    <span class="price">
+                                        <span class="amount text-dark font-weight-semibold">$60</span>
+                                    </span>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 product">
+                        <span class="product-thumb-info border-0">
+                            <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                                <span class="text-uppercase text-1">Add to Cart</span>
+                            </a>
+                            <a href="shop-product-sidebar.html">
+                                <span class="product-thumb-info-image">
+                                    <img alt="" class="img-fluid" src="~/Assets/Image/products/product-grey-4.jpg">
+                                </span>
+                            </a>
+                            <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                                <a href="shop-product-sidebar.html">
+                                    <h4 class="text-4 text-primary">Luxury bag</h4>
+                                    <span class="price">
+                                        <span class="amount text-dark font-weight-semibold">$199</span>
+                                    </span>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</div>

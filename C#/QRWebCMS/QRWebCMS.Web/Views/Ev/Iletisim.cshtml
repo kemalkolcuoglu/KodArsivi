@@ -1,0 +1,78 @@
+﻿@model QRWebCMS.Web.Models.Form
+@{
+    ViewBag.Title = "İletişim";
+    QRWebCMS.Web.Models.GenelAyarlar genelAyarlar = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri.Bul("1 = 1");
+}
+
+<iframe src="@genelAyarlar.HaritaUrl" frameborder="0" style="height: 500px; width: -webkit-fill-available; width: -moz-available; border:0"; allowfullscreen></iframe>
+
+<div class="container">
+
+    <div class="row py-4">
+        <div class="col-lg-6">
+
+            <div class="overflow-hidden mb-1">
+                <h2 class="font-weight-normal text-7 mt-2 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200"><strong class="font-weight-extra-bold">İletişim Formu</strong></h2>
+            </div>
+            <div class="overflow-hidden mb-4 pb-3">
+                <p class="mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="400">Görüş, öneri ve şikayetleriniz için bizimle iletişime geçebilirsiniz.</p>
+            </div>
+
+            @using (Html.BeginForm("Iletisim", "Ev", FormMethod.Post))
+            {
+                <div class="form-row">
+                    <div class="form-group col-lg-6">
+                        <label class="required font-weight-bold text-dark">Ad Soyad</label>
+                        <input type="text" value="" data-msg-required="Lğtfen adınızı ve Soyadınızı Giriniz" maxlength="50" class="form-control" name="AdSoyad" id="AdSoyad" required>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="required font-weight-bold text-dark">E-Posta Adresi</label>
+                        <input type="email" value="" data-msg-required="Lütfen E-Posta Adresinizi Girininiz" data-msg-email="Lütfen Geçerli Bir E-Posta Adresi Giriniz" maxlength="40" class="form-control" name="EPosta" id="EPosta" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="required font-weight-bold text-dark">Konu</label>
+                        <input type="text" value="" data-msg-required="Lütfen Konuyu Giriniz" maxlength="20" class="form-control" name="Konu" id="Konu" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="required font-weight-bold text-dark">Mesaj İçeriği</label>
+                        <textarea maxlength="500" data-msg-required="Lütfen Mesajınızı Giriniz" rows="8" class="form-control" name="MesajIcerigi" id="MesajIcerigi" required></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <input type="submit" value="GÖNDER" class="btn btn-primary btn-modern" data-loading-text="Gönderiliyor...">
+                    </div>
+                </div>
+            }
+            @if (ViewBag.Mesaj != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.Mesaj
+                </div>
+            }
+            @if (ViewBag.Hata != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Hata
+                </div>
+            }
+        </div>
+        <div class="col-lg-6">
+            <div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="800">
+                <h4 class="mt-2 mb-1"><strong>İletişim Bilgileri</strong></h4>
+                <ul class="list list-icons list-icons-style-2 mt-2">
+                    <li><i class="fas fa-map-marker-alt top-6"></i> <strong class="text-dark">Adres:</strong> @genelAyarlar.Adres</li>
+                    <li><i class="fas fa-phone top-6"></i> <strong class="text-dark">Telefon:</strong> @genelAyarlar.Telefon</li>
+                    <li><i class="fas fa-envelope top-6"></i> <strong class="text-dark">E-Posta:</strong> <a href="mailto:@genelAyarlar.EPosta">@genelAyarlar.EPosta</a></li>
+                </ul>
+            </div>
+            @Html.Raw(genelAyarlar.EkAlan1)
+            @Html.Raw(genelAyarlar.EkAlan2)
+        </div>
+    </div>
+</div>
+

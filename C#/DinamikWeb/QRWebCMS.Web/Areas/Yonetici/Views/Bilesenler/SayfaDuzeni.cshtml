@@ -1,0 +1,148 @@
+﻿@model List<QRWebCMS.Web.Models.SayfaListe>
+@{
+    ViewBag.Title = "SayfaDuzeni";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Sayfalar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Bilesenler/Menu">Menü</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Menü Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Sayfa Düzeni</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm("SayfaDuzeni", "Bilesenler", FormMethod.Post))
+        {
+            <table id="sortable" class="grid" style="cursor:pointer;">
+                @foreach (var sl in Model)
+                {
+                    <tr>
+                        <td>
+                            @sl.SayfaListeID
+                            <input type="hidden" name="SayfaListeID" value="@sl.SayfaListeID" />
+                        </td>
+                        <td class="taskSingleInline" id="task@(sl.SayfaListeID)" data-taskid="@(sl.SayfaListeID)">@(sl.NitelikTablosu + " - " + sl.NitelikID)</td>
+                    </tr>
+                }
+            </table>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12">
+                    <div class="cf nestable-lists">
+                        <div class="dd" id="nestable">
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="1">
+                                    <div class="dd-handle">Item 1</div>
+                                </li>
+                                <li class="dd-item" data-id="2">
+                                    <div class="dd-handle">Item 2</div>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="3">
+                                            <div class="dd-handle">Item 3</div>
+                                        </li>
+                                        <li class="dd-item" data-id="4">
+                                            <div class="dd-handle">Item 4</div>
+                                        </li>
+                                        <li class="dd-item" data-id="5">
+                                            <div class="dd-handle">Item 5</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="6">
+                                                    <div class="dd-handle">Item 6</div>
+                                                </li>
+                                                <li class="dd-item" data-id="7">
+                                                    <div class="dd-handle">Item 7</div>
+                                                </li>
+                                                <li class="dd-item" data-id="8">
+                                                    <div class="dd-handle">Item 8</div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                        <li class="dd-item" data-id="9">
+                                            <div class="dd-handle">Item 9</div>
+                                        </li>
+                                        <li class="dd-item" data-id="10">
+                                            <div class="dd-handle">Item 10</div>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li class="dd-item" data-id="11">
+                                    <div class="dd-handle">Item 11</div>
+                                </li>
+                                <li class="dd-item" data-id="12">
+                                    <div class="dd-handle">Item 12</div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Content
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/pages/nestable/nestable.css">
+
+    @*<style>
+        #sortable tr:hover {
+            background-color: #0094ff;
+            color: white;
+        }
+    </style>*@
+}
+
+@section Scripts
+{
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>*@
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/pages/nestable/jquery.nestable.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/pages/nestable/custom-nestable.js"></script>
+
+    @*@if (Model != null && Model.Count > 0)
+    {
+        <script>
+    $(document).ready(function () {
+        $("#sortable").sortable({
+            update: function (event, ui) {
+                var duzen = "";
+                $("#sortable").find(".taskSingleInline").each(function () {
+                    var itemID = $(this).attr("data-taskid");
+                    duzen = duzen + itemID + ",";
+                });
+                $.ajax({
+                    url: '@Url.Action("SayfaDuzeni", new { id = Model[0].SayfaID })',
+                    data: { duzen: duzen },
+                    type: 'POST',
+                    success: function (data) { },
+                    error: function (xhr, status, error) { }
+                });
+            }
+        });
+    });
+        </script>
+    }*@
+}

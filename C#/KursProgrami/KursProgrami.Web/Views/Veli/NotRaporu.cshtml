@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Not Raporu";
+    var ogrenciNot = ViewData["OgrenciNot"] as List<KursProgrami.Model.OgrenciNot>;
+    var ogrenci = ViewData["Ogrenci"] as KursProgrami.Model.Ogrenci;
+    var kurs = ViewData["Kurs"] as KursProgrami.Model.Kurs;
+    Layout = "~/Views/Shared/_VeliLayout.cshtml";
+}
+
+
+@section Content
+{
+    <style>
+        .fotograf {
+            margin-left: 30px;
+        }
+
+            .fotograf img {
+                border: solid 5px;
+            }
+    </style>
+}
+
+<div class="pcoded-content">
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Not Raporu</h4>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="~/Panel/Anasayfa">
+                                <i class="feather icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#!">Not Raporu</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="container">
+                                <div class="row invoice-contact">
+                                    <div class="col-md-4">
+                                        <div class="invoice-box row">
+                                            <div class="col-sm-6">
+                                                <div class="fotograf">
+                                                    <img src="~/Assets/Image/Ogrenciler/@ogrenci.Fotograf" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 m-t-25">
+                                        <div class="col-md-12 col-xs-12">
+                                            <h5>KURS BİLGİLERİ</h5>
+                                            <hr />
+                                            <h6><b>KURS ADI: </b> @kurs.KursAdi.ToUpper()</h6>
+                                            <h6><b>ADRES: </b> @kurs.Adres</h6>
+                                            <h6><b>TELEFON: </b> @kurs.Telefon</h6>
+                                            <h6><b>FAX: </b> @kurs.Fax</h6>
+                                            <h6><b>WEB SİTESİ: </b> @kurs.WebSitesi</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 m-t-25">
+                                        <div class="col-md-12 col-xs-12">
+                                            <h5>ÖĞRENCİ BİLGİLERİ</h5>
+                                            <hr />
+                                            <h6><b>T.C. KİMLİK NO.: </b> @(ogrenci.TCKNO)</h6>
+                                            <h6><b>ÖĞRENCİ ADI: </b> @(ogrenci.Ad.ToUpper() + " " + ogrenci.Soyad.ToUpper())</h6>
+                                            <h6><b>DOĞUM TARİHİ: </b> @ogrenci.DogumTarihi.ToShortDateString()</h6>
+                                            <h6><b>KAYIT TARİHİ: </b> @(ogrenci.KayitTarihi.ToShortDateString())</h6>
+                                            <h6><b>DURUM: </b> @((KursProgrami.Model.Enum.Durum)ogrenci.Durum)</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table width="100%" class="table table-bordered" cellpadding="3" cellspacing="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tarih</th>
+                                                    @for (int i = 1; i <= 31; i++)
+                                                    {
+                                                        <th>@i</th>
+                                                    }
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    DateTime zaman = ogrenci.KayitTarihi;
+                                                }
+                                                @while (zaman <= DateTime.Now.AddMonths(1))
+                                                {
+                                                    <tr>
+                                                        <td>@zaman.ToString("yyyy-MMMM")</td>
+
+                                                        @{
+                                                            List<KursProgrami.Model.OgrenciNot> od = ogrenciNot.Where(x => x.Tarih.Year == zaman.Year && x.Tarih.Month == zaman.Month).ToList();
+                                                        }
+
+                                                        @for (int i = 1; i <= 31; i++)
+                                                        {
+                                                            if (od.Any(x => x.Tarih.Day == i))
+                                                            {
+                                                                <td>X</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td></td>
+                                                            }
+                                                        }
+                                                    </tr>
+                                                    zaman = zaman.AddMonths(1);
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12" style="width:-webkit-fill-available; width:-moz-available; margin-bottom:25px;">
+                                        @*<div id="chart_div"></div>*@
+                                        <div id="chart_div"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div>
+                                            <h6>Terms And Condition :</h6>
+                                            <p>
+                                                lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script>
+            google.load("visualization", "1", { packages: ["corechart"] });
+            google.setOnLoadCallback(drawStuff);
+
+            function drawStuff() {
+                var chartDiv = document.getElementById('chart_div');
+                var data = google.visualization.arrayToDataTable([
+                    ['Devamsızlık Nedenleri', 'Gün Sayısı'],
+                    ['Gelmedi', 10],
+                    ['Tatil', 20],
+                    ['Raporlu', 8],
+                    ['İzinli', 1]
+                ]);
+
+                var options = {
+                    title: 'Öğrenci Devamsızlık Raporu',
+                    hAxis: { title: 'Devamsızlık Nedenleri', titleTextStyle: { color: 'black' } }
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+
+            $(window).resize(function () {
+                drawStuff();
+            });
+    </script>
+}
+

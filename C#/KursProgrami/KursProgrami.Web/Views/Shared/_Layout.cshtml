@@ -1,0 +1,258 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kurs Programı - @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="QRYAZILIM" />
+    <link rel="icon" href="~/Assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+
+    @*<link rel="stylesheet" type="text/css" href="~/Assets/bower_components/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/icon/feather/css/feather.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/css/font-awesome-n.min.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/css/component.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/pages/waves/css/waves.min.css" media="all">
+        <link rel="stylesheet" type="text/css" href="~/Assets/css/widget.css">
+        <link rel="stylesheet" type="text/css" href="~/Assets/css/pages.css">*@
+
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" type="text/css" href="~/Assets/icon/feather/css/feather.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/font-awesome-n.min.css">
+
+    @RenderSection("Content", required: false)
+</head>
+<body>
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <nav class="navbar header-navbar pcoded-header" logo-theme="theme6">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo" logo-theme="theme6">
+                        <a href="~/Panel/Anasayfa">
+                            <img class="img-fluid" src="~/Assets/images/qryazilim_beyaz.png" style="width:80%" />
+                        </a>
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu"></i>
+                        </a>
+                        <a class="mobile-options waves-effect waves-light">
+                            <i class="feather icon-more-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-bell"></i>
+                                        <span class="badge bg-c-red">5</span>
+                                    </div>
+                                    <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <h6>Notifications</h6>
+                                            <label class="label label-danger">New</label>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">John Doe</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Joseph William</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Sara Soudein</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon feather icon-settings"></i>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li class="drp-u-details">
+                                            <span>Yönetici</span>
+                                            <a href="~/Panel/Cikis" class="dud-logout" title="Çıkış Yap">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="nav-list">
+                            <div class="pcoded-inner-navbar main-menu">
+                                <div class="pcoded-navigation-label">Panel</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="~/Panel/Anasayfa" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-home"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Anasayfa</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Panel/GenelAyarlar" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-sliders-h"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Genel Ayarlar</span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Panel/Cikis" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Çıkış Yap</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="pcoded-navigation-label">Kurs Bilgileri</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Kişiler</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="~/Kisiler/Ogrenciler" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Öğrenciler</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Kisiler/Egitmenler" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Eğitmenler</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-clipboard-list"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Tanımlar</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="~/KursTanim/Donemler" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Dönemler</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/KursTanim/Siniflar" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Sınıflar</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/KursTanim/Dersler" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Dersler</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/KursTanim/GunlukProgramlar" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Günlük Programlar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="fas fa-tasks"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">İşlemler</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="~/Islemler/Devamsizliklar" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Devamsızlıklar</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="~/Islemler/DersNotlari/9" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Ders Notları</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Yonetici/Bilesenler/GorselEkle" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-upload-cloud"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Görsel Yükle</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <div class="page-body">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<script type="text/javascript" src="~/Assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/pace.min.js"></script>
+    <script type="text/javascript" src="~/Assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Assets/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Assets/bower_components/modernizr/js/modernizr.js"></script>
+    <script type="text/javascript" src="~/Assets/pages/waves/js/waves.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/pcoded.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/vertical/vertical-layout.min.js"></script>*@
+
+    @Scripts.Render("~/Scripts/js")
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

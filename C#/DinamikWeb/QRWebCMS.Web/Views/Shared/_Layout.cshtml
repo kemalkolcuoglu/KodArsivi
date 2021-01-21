@@ -1,0 +1,270 @@
+﻿@using System.Web.Optimization;
+@{
+    QRWebCMS.Web.Islemler.TemelIslemler<QRWebCMS.Web.Models.Menu> mi = QRWebCMS.Web.App_Start.Tanimlamalar.menuIslemleri;
+    QRWebCMS.Web.Islemler.EkIslemler.MenuListeIslemleri mli = QRWebCMS.Web.App_Start.Tanimlamalar.menuListeIslemleri;
+    QRWebCMS.Web.Islemler.TemelIslemler<QRWebCMS.Web.Models.SosyalMedya> smi = QRWebCMS.Web.App_Start.Tanimlamalar.sosyalMedyaIslemleri;
+    QRWebCMS.Web.Islemler.TemelIslemler<QRWebCMS.Web.Models.GenelAyarlar> ga = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri;
+
+    List<QRWebCMS.Web.Models.Menu> menuler = mi.VeriGetir("Etkin = 1 Order By GoruntulemeSirasi");
+    List<QRWebCMS.Web.Models.MenuListe> menuListe = mli.VeriGetirSQL("Select * From vMenuListe Order By MenuGoruntulemeSirasi");
+    List<QRWebCMS.Web.Models.SosyalMedya> sosyalMedyaListe = smi.VeriGetir("1 = 1");
+    QRWebCMS.Web.Models.GenelAyarlar genelAyarlar = ga.Bul("GenelAyarlarID = 1") ?? new QRWebCMS.Web.Models.GenelAyarlar();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@genelAyarlar.SiteAdi - @ViewBag.Title</title>
+    <meta name="author" content="QRYAZILIM">
+    <link rel="shortcut icon" href="~/Assets/Image/logo3.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/Assets/Image/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light%7CPlayfair+Display:400" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="~/Assets/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/animate/animate.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/simple-line-icons/css/simple-line-icons.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="~/Assets/vendor/magnific-popup/magnific-popup.min.css">
+        <link rel="stylesheet" href="~/Assets/Content/theme.css">
+        <link rel="stylesheet" href="~/Assets/Content/theme-elements.css">
+        <link rel="stylesheet" href="~/Assets/Content/theme-blog.css">
+        <link rel="stylesheet" href="~/Assets/Content/theme-shop.css">
+        <link rel="stylesheet" href="~/Assets/vendor/rs-plugin/css/settings.css">
+        <link rel="stylesheet" href="~/Assets/vendor/rs-plugin/css/layers.css">
+        <link rel="stylesheet" href="~/Assets/vendor/rs-plugin/css/navigation.css">
+        <link rel="stylesheet" href="~/Assets/Content/skins/default.css">
+        <link rel="stylesheet" href="~/Assets/Content/custom.css">
+    *@
+
+    @Styles.Render("~/Content/css")
+
+    @RenderSection("Content", false)
+</head>
+<body>
+    <div class="body">
+        <header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 120, 'stickyHeaderContainerHeight': 70}">
+            <div class="header-body border-color-primary header-body-bottom-border">
+                <div class="header-top header-top-default border-bottom-0">
+                    <div class="container">
+                        <div class="header-row py-2">
+                            <div class="header-column justify-content-start">
+                                <div class="header-row">
+                                    <nav class="header-nav-top">
+                                        <ul class="nav nav-pills text-uppercase text-2">
+                                            <li class="nav-item nav-item-anim-icon d-none d-md-block">
+                                                <a class="nav-link pl-0" href="~/Sayfa/Demo"><i class="fas fa-angle-right"></i> Demo Talebi</a>
+                                            </li>
+                                            <li class="nav-item nav-item-anim-icon d-none d-md-block">
+                                                <a class="nav-link" href="~/Ev/Iletisim"><i class="fas fa-angle-right"></i> İletişim</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="header-column justify-content-end">
+                                <div class="header-row">
+                                    <nav class="header-nav-top">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a href="mailto:@genelAyarlar.EPosta"><i class="far fa-envelope text-4 text-color-primary" style="top: 1px;"></i> @genelAyarlar.EPosta</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="tel:@genelAyarlar.Telefon"><i class="fab fa-whatsapp text-4 text-color-primary" style="top: 0;"></i> @genelAyarlar.Telefon</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-container container">
+                    <div class="header-row">
+                        <div class="header-column">
+                            <div class="header-row">
+                                <div class="header-logo">
+                                    <a href="~/Ev/Anasayfa">
+                                        <img alt="@genelAyarlar.Logo" src="~/Assets/Image/logo3.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-column justify-content-end">
+                            <div class="header-row">
+                                <div class="header-nav header-nav-links order-2 order-lg-1">
+                                    <div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                        <nav class="collapse">
+                                            <ul class="nav nav-pills" id="mainNav">
+                                                <li>
+                                                    <a href="~/Ev/Anasayfa">Anasayfa</a>
+                                                </li>
+                                                @foreach (var item in menuler)
+                                                {
+                                                    if (item.Sayfa)
+                                                    {
+                                                        if (item.Dropdown)
+                                                        {
+                                                            <li class="dropdown">
+                                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                                    <span><i class="@item.Ikon"></i></span>&nbsp;@item.Baslik
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    @foreach (var drop in mli.VeriGetirSQL("Select * From vmenuListe Where MenuID = " + item.MenuID + " Order By MenuGoruntulemeSirasi"))
+                                                                    {
+                                                                        <li>
+                                                                            <a class="dropdown-item" href="~/Sayfa/Sayfa/@drop.SayfaID"><span><i class="@drop.SayfaIkon"></i></span>&nbsp;@drop.SayfaBaslik</a>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                            List<QRWebCMS.Web.Models.MenuListe> menuSayfa = mli.VeriGetirSQL("Select * From vmenuListe Where MenuID = " + item.MenuID);
+                                                            if (menuSayfa != null && menuSayfa.Count > 0)
+                                                            {
+                                                                <li>
+                                                                    <a href="~/Sayfa/Sayfa/@menuSayfa[0].SayfaID"><span><i class="@menuSayfa[0].SayfaIkon"></i></span>&nbsp;@menuSayfa[0].SayfaBaslik</a>
+                                                                </li>
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <a href="@item.Link"><span><i class="@item.Ikon"></i></span>&nbsp;@item.Baslik</a>
+                                                        </li>
+                                                    }
+                                                }
+                                                <li>
+                                                    <a href="~/Ev/Iletisim">İletişim</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <ul class="header-social-icons social-icons d-none d-sm-block">
+                                        @foreach (var item in sosyalMedyaListe)
+                                        {
+                                            <li class="social-icons-linkedin"><a href="@item.Link" target="_blank" title="@item.Baslik"><i class="@item.Ikon"></i></a></li>
+                                        }
+                                    </ul>
+                                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div role="main" class="main">
+            @RenderBody()
+        </div>
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row py-5 my-4">
+                    <div class="col-md-5 col-lg-5 mb-4 mb-lg-0">
+                        <h5 class="text-3 mb-3">E-POSTA BÜLTENİNE ABONE OLUN</h5>
+                        <p class="pr-1">Abone olarak yeni gelişmelerden haberdar edileceksiniz.</p>
+                        <div class="alert alert-success d-none" id="newsletterSuccess">
+                            <strong>Başarılı!</strong> E-Posta adresinin listemize eklnemiştir.
+                        </div>
+                        <div class="alert alert-danger d-none" id="newsletterError"></div>
+                        @using (Html.BeginForm("EPostaBulteni", "Ev", FormMethod.Post))
+                        {
+                            <div class="input-group input-group-rounded">
+                                @Html.TextBox("eposta", null, new { @class = "form-control form-control-sm bg-light", placeholder = "E-Posta Adresi" })
+
+                                <span class="input-group-append">
+                                    <button class="btn btn-light text-color-dark" type="submit"><strong>ABONE OL!</strong></button>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-5 col-lg-5 mb-4 mb-md-0">
+                        <div class="contact-details">
+                            <h5 class="text-3 mb-3">BİZE ULAŞIN</h5>
+                            <ul class="list list-icons list-icons-lg">
+                                <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i><p class="m-0">@genelAyarlar.Adres</p></li>
+                                <li class="mb-1"><i class="fab fa-whatsapp text-color-primary"></i><p class="m-0"><a href="tel:@genelAyarlar.Telefon">@genelAyarlar.Telefon</a></p></li>
+                                <li class="mb-1"><i class="far fa-envelope text-color-primary"></i><p class="m-0"><a href="mailto:@genelAyarlar.EPosta">@genelAyarlar.EPosta</a></p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <h5 class="text-3 mb-3">TAKİP EDİN</h5>
+                        <ul class="social-icons">
+                            @foreach (var item in sosyalMedyaListe)
+                            {
+                                <li class="social-icons-linkedin"><a href="@item.Link" target="_blank" title="@item.Baslik"><i class="@item.Ikon"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @*<div style="text-align:center"><i class="fa fa-edit" style="font-size: 25px;display:inline-block;padding-right: 7px;" aria-hidden="true"></i>2019 Yılı Hafızlık Eğitim Programı kaydı için tıklayın.</div>*@
+            <div class="footer-copyright">
+                <div class="container py-2">
+                    <div class="row py-4">
+                        <div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
+                            <p>© @genelAyarlar.SirketAdi 2019. BÜTÜN HAKLARI SAKLIDIR.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @*<script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Assets/vendor/jquery.appear/jquery.appear.min.js"></script>
+        <script src="~/Assets/vendor/modernizr/modernizr.min.js"></script>
+        <script src="~/Assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="~/Assets/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+        <script src="~/Assets/vendor/popper/umd/popper.min.js"></script>
+        <script src="~/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/Assets/vendor/common/common.min.js"></script>
+        <script src="~/Assets/vendor/jquery.validation/jquery.validate.min.js"></script>
+        <script src="~/Assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+        <script src="~/Assets/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+        <script src="~/Assets/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+        <script src="~/Assets/vendor/isotope/jquery.isotope.min.js"></script>
+        <script src="~/Assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+        <script src="~/Assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="~/Assets/vendor/vide/jquery.vide.min.js"></script>
+        <script src="~/Assets/vendor/vivus/vivus.min.js"></script>
+        <script src="~/Assets/Script/theme.js"></script>
+        <script src="~/Assets/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="~/Assets/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="~/Assets/Script/custom.js"></script>
+        <script src="~/Assets/Script/theme.init.js"></script>
+        <script src="~/Assets/Script/examples/examples.portfolio.js"></script>*@
+
+    @Scripts.Render("~/Scripts/js")
+
+    @RenderSection("Scripts", false)
+
+    <script type="text/javascript">
+        $(function () {
+            $.amaran({
+                content: {
+                    bgcolor: '#017dad',
+                    color: '#fff',
+                    message: '<div style="text-align:center"><i class="fa fa-edit" style="font-size: 25px;display:inline-block;padding-right: 7px;" aria-hidden="true"></i>2019 Yılı Hafızlık Eğitim Programı kaydı için tıklayın.</div>'
+                },
+                theme: 'colorful',
+                sticky: true,
+                onClick: function () {
+                    window.location = '/Sayfa/OnlineKayit';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

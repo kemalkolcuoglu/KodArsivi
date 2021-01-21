@@ -1,0 +1,67 @@
+﻿@model List<QRWebCMS.Web.Models.Kayit>
+@{
+    ViewBag.Title = "OnKayitFormlari";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Ön Kayıt Formları</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Panel</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Ön Kayıt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Formlar</h5>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ad Soyad</th>
+                        <th>Sınıfı</th>
+                        <th>İletişim Bilgileri</th>
+                        <th>Kayıt Tarihi</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int j = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-left">@(j++)</td>
+                            <td>@(item.Ad + " " + item.Soyad)</td>
+                            <td>@item.Sinif</td>
+                            <td>@(item.Telefon + " - " + item.CepTelefon)</td>
+                            <td>@item.KayitGonderimTarihi</td>
+                            <td><a href="~/Yonetici/Panel/OnKayitFormu/@item.KayitID" class="btn btn-info">Kayıt Detayları</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

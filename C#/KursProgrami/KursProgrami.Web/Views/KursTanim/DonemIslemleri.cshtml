@@ -1,0 +1,104 @@
+﻿@model KursProgrami.Model.Donem
+
+@{
+    ViewBag.Title = "Dönem İşlemleri";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Dönem İşlemleri</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanımları</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/KursTanim/Donemler">Dönemler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Dönem İşlemleri</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DonemAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DonemAdi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DonemAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BaslangicTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.BaslangicTarihi, new { htmlAttributes = new { @class = "form-control", type = "date" } })*@
+                            @if (Model != null && Model.BaslangicTarihi != DateTime.MinValue)
+                            {
+                                <input type="text" class="form-control date" name="BaslangicTarihi" data-mask="99/99/9999" value="@Model.BaslangicTarihi">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control date" name="BaslangicTarihi" data-mask="99/99/9999" placeholder="Başlangıç Tarihi">
+                            }
+                            @Html.ValidationMessageFor(model => model.BaslangicTarihi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BitisTarihi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @*@Html.EditorFor(model => model.BitisTarihi, new { htmlAttributes = new { @class = "form-control", type = "date" } })*@
+                            @if (Model != null && Model.BitisTarihi != DateTime.MinValue)
+                            {
+                                <input type="text" class="form-control date" name="BitisTarihi" data-mask="99/99/9999" value="@Model.BitisTarihi">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control date" name="BitisTarihi" data-mask="99/99/9999" placeholder="Bitiş Tarihi">
+                            }
+                            @Html.ValidationMessageFor(model => model.BitisTarihi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.Etkin)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px">
+                <div class="col-lg-12 col-md-12">
+                    <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Assets/pages/form-masking/inputmask.js"></script>
+    <script type="text/javascript" src="~/Assets/pages/form-masking/jquery.inputmask.js"></script>
+    <script type="text/javascript" src="~/Assets/pages/form-masking/form-mask.js"></script>
+}

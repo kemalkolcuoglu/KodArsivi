@@ -1,0 +1,82 @@
+﻿@model List<QRWebCMS.Web.Models.Gorsel>
+@{
+    ViewBag.Title = "Görsel Ekle";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Görseller</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Görseller</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Görsel Yükle</h5>
+    </div>
+    <div class="card-block">
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                <strong>@ViewBag.Message</strong>
+            </div>
+        }
+        else if (ViewBag.Hata != null)
+        {
+            <div class="alert alert-danger">
+                <strong>@ViewBag.Hata</strong>
+            </div>
+        }
+        @using (Html.BeginForm("GorselEkle", "Bilesenler", FormMethod.Post, new { @class = "dropzone", enctype = "multipart/form-data" }))
+        {
+            <div class="fallback">
+                <input name="file" id="file" type="file" multiple />
+            </div>
+            <div class="text-center m-t-20">
+                <button type="submit" class="btn btn-primary">Görsel Yükle</button>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>File Upload</h5>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            @foreach (var items in Model)
+            {
+                <div class="col-md-3">
+                    <img src="~/@items.GorselAdres" width="200px" height="200px" style="padding:5px 5px;" />
+                    <hr />
+                    <h5>Görsel Adresi:</h5>
+                    <p>@items.GorselAdres</p>
+                    @Html.ActionLink("Sil", "GorselSil", new { id = items.GorselID }, new { @class = "btn btn-danger btn-sm" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Areas/Yonetici/Assets/pages/file-upload/dropzone-amd-module.min.js"></script>
+}

@@ -1,0 +1,89 @@
+﻿@model List<int>
+@{
+    ViewBag.Title = "Menu Sayfa";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+
+    var sayfa = TempData["SayfaListesi"] as List<QRWebCMS.Web.Models.Sayfa>;
+    var etkinSayfa = TempData["EtkinSayfaListesi"] as List<QRWebCMS.Web.Models.Sayfa>;
+    int menuID = Convert.ToInt32(TempData["MenuID"]);
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Sayfalar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Bilesenler/Menu">Menü</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Menü Sayfa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("MenuSayfa", "Bilesenler", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">
+            <h5>Menü Sayfaları</h5>
+            <a href="~/Yonetici/Bilesenler/MenuSayfaTemizle/@menuID" class="btn btn-danger">İçerik Temizle</a>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="row">
+                <div class="col-sm-12 col-xl-6 m-b-30">
+                    <h4 class="sub-title">İçerik Listesi</h4>
+                    @*@Html.ListBox("menuListe", sayfa, new { @class = "searchable", multiple = "multiple" })*@
+
+                    <select id='custom-headers' class="searchable" multiple='multiple' name="menuListe">
+                        @foreach (var item in sayfa)
+                        {
+                            if (etkinSayfa.Any(x => x.SayfaID == item.SayfaID))
+                            {
+                                <option value='@item.SayfaID' selected>@item.Baslik</option>
+                            }
+                            else
+                            {
+                                <option value='@item.SayfaID'>@item.Baslik</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" value="Onayla" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Content
+{
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/bower_components/select2/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Yonetici/Assets/bower_components/multiselect/css/multi-select.css" />
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/bower_components/multiselect/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/js/jquery.quicksearch.js"></script>
+    <script type="text/javascript" src="~/Areas/Yonetici/Assets/pages/advance-elements/select2-custom.js"></script>
+}

@@ -1,0 +1,73 @@
+﻿@model KursProgrami.Model.Ders
+@{
+    ViewBag.Title = "DersEkle";
+}
+
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Ders İşlemleri</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanımları</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="~/KursTanim/Dersler">Dersler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Ders İşlemleri</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DersAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DersAdi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DersAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DersAciklamasi, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.DersAciklamasi, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DersAciklamasi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.Etkin)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px">
+                <div class="col-lg-12 col-md-12">
+                    <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

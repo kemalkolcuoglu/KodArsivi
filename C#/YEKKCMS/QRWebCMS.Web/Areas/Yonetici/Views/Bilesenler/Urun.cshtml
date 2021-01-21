@@ -1,0 +1,152 @@
+﻿@model List<QRWebCMS.Web.Models.Urun>
+@{
+    ViewBag.Title = "Ürün";
+    Layout = "~/Areas/Yonetici/Views/Shared/_Layout.cshtml";
+
+    var kategori = ViewData["Kategori"] as SelectList;
+    bool durum = ViewBag.Durum ?? false;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Galeriler</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Bileşenler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Ürün</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Ürün Kategorisi</h5>
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm("Urun", "Bilesenler", FormMethod.Get))
+        {
+            <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @Html.Label("Ürün Kategorisi", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("id", kategori, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Veri Getir" class="btn btn-info btn-block" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (durum)
+{
+    <div class="card">
+        <div class="card-header">
+            <h5>Ürün Listesi</h5>
+            <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#urunEkle"><i class="fa fa-plus"></i> Ürün Ekle</button>
+            <div class="modal fade" id="urunEkle" tabindex="-1" role="dialog">
+                @Html.Action("UrunEkle", "Bilesenler")
+            </div>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Etkin</th>
+                            <th>Vitrin</th>
+                            <th>Görsel</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int urunSayisi = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(urunSayisi++)</th>
+                                <td>@item.Baslik</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>@(item.Vitrin ? "Evet" : "Hayır")</td>
+                                <td><img src="@item.Gorsel" style="width:10%" /></td>
+                                <td>
+                                    @*<button type="button" class="btn btn-inverse btn-sm waves-effect" data-toggle="modal" data-target="#urunDuzenle"><i class="fa fa-edit"></i></button>
+                                    <div class="modal fade" id="urunDuzenle" tabindex="-1" role="dialog">
+                                        @Html.Action("UrunDuzenle", "Bilesenler", new { id = item.UrunID })
+                                    </div>*@
+                                    <a href="~/Yonetici/Bilesenler/UrunDuzenle/@item.UrunID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#urunSil"><i class="fas fa-times"></i></button>
+                                    <div class="modal fade" id="urunSil" tabindex="-1" role="dialog">
+                                        @using (Html.BeginForm("UrunSil", "Bilesenler", new { id = item.UrunID }, FormMethod.Post))
+                                        {
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Ürün Sil</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @Html.AntiForgeryToken()
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <p>Seçmiş olduğunuz Ürün silinecektir. Silmek istediğinize emin misiniz?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-times"></i> İptal</button>
+                                                        <button type="submit" class="btn btn-danger waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@section Content
+{
+    <style>
+        @@media (min-width: 768px) {
+            .modal-xl {
+                width: 90%;
+                max-width: 1200px;
+            }
+        }
+    </style>
+}
+
+
+@section Scripts
+{
+    <script src="~/Areas/Yonetici/Assets/js/tinymce/tinymce.min.js"></script>
+    <script src="~/Areas/Yonetici/Assets/pages/wysiwyg-editor/wysiwyg-editor.js"></script>
+}

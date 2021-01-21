@@ -1,0 +1,68 @@
+﻿@model List<QRWebCMS.Web.Models.Form>
+@{
+    ViewBag.Title = "Formlar";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Formlar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Yonetici/Panel/Anasayfa">
+                            <i class="feather icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Panel</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Form</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Formlar</h5>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Gönderen Ad Soyad</th>
+                        <th>E-Posta</th>
+                        <th>Konu</th>
+                        <th>Gönderim Tarihi</th>
+                        <th>Görüntüle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sayfaSayisi = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@(sayfaSayisi++)</th>
+                            <td>@item.AdSoyad</td>
+                            <td>@item.EPosta</td>
+                            <td>@item.Konu</td>
+                            <td>@item.GonderimTarihi</td>
+                            <td>
+                                <a href="~/Yonetici/Panel/Form/@item.FormID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

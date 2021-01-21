@@ -1,0 +1,67 @@
+﻿@model List<KursProgrami.Model.SaatlikProgram>
+@{
+    ViewBag.Title = "Saatlik Programlar";
+    int? id = ViewData["id"] as int?;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Saatlik Programlar</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanım</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Saatlik Programlar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Günlük Program Listesi</h5>
+        <a href="~/KursTanim/SaatlikProgramEkle/@id" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-plus"></i> Saatlik Program Ekle</a>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Başlangıç Saati</th>
+                        <th>Bitiş Saati</th>
+                        <th>Program Adı</th>
+                        <th>Program Açıklaması</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.BaslangicSaati</td>
+                            <td>@item.BitisSaati</td>
+                            <td>@item.ProgramAdi</td>
+                            <td>@item.ProgramAciklamasi</td>
+                            <td>
+                                <a href="~/KursTanim/SaatlikProgramDuzenle/@item.GunlukProgramID?programId=@item.SaatlikProgramID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#dersSil"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

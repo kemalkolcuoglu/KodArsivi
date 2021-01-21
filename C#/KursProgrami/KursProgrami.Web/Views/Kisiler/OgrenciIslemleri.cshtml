@@ -1,0 +1,338 @@
+﻿@model KursProgrami.Model.ViewModel.OgrenciMV
+@{
+    ViewBag.Title = "Öğrenci İşlemleri";
+    SelectList cinsiyetSL = new SelectList(new List<SelectListItem>()
+    {
+        new SelectListItem() { Value = "-1", Text = "Cinsiyet Seçiniz" },
+        new SelectListItem() { Value = "E", Text = "Erkek" },
+        new SelectListItem() { Value = "K", Text = "Kız" }
+    }, "Value", "Text");
+
+    var il = ViewData["Il"] as SelectList;
+    var ilce = ViewData["Ilce"] as SelectList;
+    var durum = ViewData["Durum"] as SelectList;
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Öğrenci İşlemleri</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kişiler</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Öğrenci</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Öğrenci İşlemleri</h5>
+    </div>
+    <div class="card-block">
+        @if (ViewBag.Hata != null)
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.Hata
+                    </div>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm(null, "Kisiler", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="form-horizontal col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.TCKNO, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.TCKNO, new { htmlAttributes = new { @class = "form-control", placeholder = "T.C. Kimlik No." } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.TCKNO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Durum, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.DropDownListFor(model => model.Ogrenci.Durum, durum, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Ad, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.Ad, new { htmlAttributes = new { @class = "form-control", placeholder = "Ad" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.Ad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Soyad, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.Soyad, new { htmlAttributes = new { @class = "form-control", placeholder = "Soyad" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.Soyad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Cinsiyet, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.DropDownListFor(model => model.Ogrenci.Cinsiyet, cinsiyetSL, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.DogumYeri, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.DogumYeri, new { htmlAttributes = new { @class = "form-control", placeholder = "Doğum Yeri" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.DogumYeri, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.DogumTarihi, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @*@Html.EditorFor(model => model.Ogrenci.DogumTarihi, new { htmlAttributes = new { @class = "form-control", placeholder = "Doğum Tarihi" } })*@
+                            @*<input id="dropper-default" class="form-control" name="Ogrenci.DogumTarihi" type="date" placeholder="Doğum Tarihi" />*@
+                            @if (Model != null && Model.Ogrenci != null && Model.Ogrenci.DogumTarihi != DateTime.MinValue)
+                            {
+                                <input type="text" class="form-control date" name="Ogrenci.DogumTarihi" data-mask="99/99/9999" value="@Model.Ogrenci.DogumTarihi">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control date" name="Ogrenci.DogumTarihi" data-mask="99/99/9999" placeholder="Doğum Tarihi">
+                            }
+                            @Html.ValidationMessageFor(model => model.Ogrenci.DogumTarihi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.AnneAdi, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.AnneAdi, new { htmlAttributes = new { @class = "form-control", placeholder = "Anne Adı" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.AnneAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.BabaAdi, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.BabaAdi, new { htmlAttributes = new { @class = "form-control", placeholder = "Baba Adı" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.BabaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.AnneMeslegi, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.AnneMeslegi, new { htmlAttributes = new { @class = "form-control", placeholder = "Anne Mesleği" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.AnneMeslegi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.BabaMeslegi, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.BabaMeslegi, new { htmlAttributes = new { @class = "form-control", placeholder = "Baba Mesleği" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.BabaMeslegi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.EngelDurumu, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        @*@Html.CheckBoxFor(model => model.Ogrenci.EngelDurumu, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="checkbox" name="Ogrenci.EngelDurumu" onclick="showMe('engeli')" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="engeli" style="display:none">
+                        @Html.LabelFor(model => model.Ogrenci.Engeli, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.Engeli, new { htmlAttributes = new { @class = "form-control", placeholder = "Engeli" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.Engeli, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Fotoğraf", htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @*@Html.EditorFor(model => model.Fotograf, new { htmlAttributes = new { @class = "form-control", placeholder = "Fotoğraf", type = "file" } })*@
+                            <input type="file" class="form-control" name="OgrenciFoto" id="OgrenciFoto" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if (Model != null && Model.Ogrenci != null && Model.Ogrenci.Fotograf != null)
+                        {
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="ogrenciFoto">
+                                    <img src="~/Assets/Image/Ogrenciler/@Model.Ogrenci.Fotograf" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-horizontal col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.Telefon1, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.OgrenciIletisim.Telefon1, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon No. 1" } })
+                            @Html.ValidationMessageFor(model => model.OgrenciIletisim.Telefon1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.Telefon2, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.OgrenciIletisim.Telefon2, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon No. 2" } })
+                            @Html.ValidationMessageFor(model => model.OgrenciIletisim.Telefon2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.EPosta, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.OgrenciIletisim.EPosta, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Posta Adresi" } })
+                            @Html.ValidationMessageFor(model => model.OgrenciIletisim.EPosta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.Il, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.DropDownListFor(model => model.OgrenciIletisim.Il, il, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.Ilce, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.DropDownListFor(model => model.OgrenciIletisim.Ilce, ilce, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OgrenciIletisim.Adres, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.TextAreaFor(model => model.OgrenciIletisim.Adres, new { @class = "form-control", placeholder = "Adres", rows = "5" })
+                            @Html.ValidationMessageFor(model => model.OgrenciIletisim.Adres, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Aciklama, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.TextAreaFor(model => model.Ogrenci.Aciklama, new { @class = "form-control", placeholder = "Açıklama", rows = "5" })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.Aciklama, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.Etkin, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.CheckBoxFor(model => model.Ogrenci.Etkin, null)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.OzelKod1, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.OzelKod1, new { htmlAttributes = new { @class = "form-control", placeholder = "Özel Kod-1" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.OzelKod1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.OzelKod2, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.OzelKod2, new { htmlAttributes = new { @class = "form-control", placeholder = "Özel Kod-1" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.OzelKod2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.OzelKod3, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.OzelKod3, new { htmlAttributes = new { @class = "form-control", placeholder = "Özel Kod-3" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.OzelKod3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ogrenci.OzelKod4, htmlAttributes: new { @class = "control-label col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ogrenci.OzelKod4, new { htmlAttributes = new { @class = "form-control", placeholder = "Özel Kod-4" } })
+                            @Html.ValidationMessageFor(model => model.Ogrenci.OzelKod4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px">
+                <div class="col-lg-12 col-md-12">
+                    <input type="submit" value="Onayla" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Content
+{
+    <style>
+        .ogrenciFoto {
+            margin-top: 5px;
+        }
+
+            .ogrenciFoto img {
+                border: solid 2px;
+                padding: 3px;
+                width: 25%;
+            }
+    </style>
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Assets/pages/form-masking/inputmask.js"></script>
+    <script type="text/javascript" src="~/Assets/pages/form-masking/jquery.inputmask.js"></script>
+    <script type="text/javascript" src="~/Assets/pages/form-masking/form-mask.js"></script>
+
+    <script>
+        $("#OgrenciIletisim_Il").change(function () {
+
+            var ddlCountry = $(this);
+            var countryId = ddlCountry.val();
+
+            if (countryId != "" || countryId != "-1") {
+
+                $("#OgrenciIletisim_Ilce option").remove();
+
+            $.ajax({
+                method: "GET",
+                url: '@Url.Action("IleGoreIlce", "Panel")' + '/' + countryId
+            }).done(function (result) {
+
+                var ddlCity = $("#OgrenciIletisim_Ilce");
+
+                for (var i = 0; i < result.length; i++) {
+                    var cityName = result[i].IlceAdi;
+                    var cityId = result[i].IlceID;
+                    var opt = $("<option></option>");
+
+                    opt.text(cityName);
+                    opt.attr("value", cityId);
+
+                    ddlCity.append(opt);
+                }
+            })}
+            else {
+                $("#OgrenciIletisim_Ilce option").not(":first").remove();
+            }
+        });
+    </script>
+
+    <script>
+        function showMe(box) {
+            var chboxs = document.getElementsByName("Ogrenci.EngelDurumu");
+            var vis = "none";
+            for (var i = 0; i < chboxs.length; i++) {
+                if (chboxs[i].checked) {
+                    vis = "block";
+                    break;
+                }
+            }
+            document.getElementById(box).style.display = vis;
+        }
+    </script>
+}

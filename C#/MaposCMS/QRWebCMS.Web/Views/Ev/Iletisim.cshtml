@@ -1,0 +1,75 @@
+﻿@model QRWebCMS.Web.Models.Form
+@{
+    ViewBag.Title = "İletişim";
+    QRWebCMS.Web.Models.GenelAyarlar genelAyarlar = QRWebCMS.Web.App_Start.Tanimlamalar.genelAyarlarIslemleri.Bul("1 = 1");
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">BİZE ULAŞIN</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="~/Ev/Anasayfa">MAPOS ÇAMUR POMPALARI</a></li>
+            <li class="active">İLETİŞİM</li>
+        </ul>
+    </div>
+</div>
+<iframe src="@genelAyarlar.HaritaUrl" frameborder="0" style="height: 500px; width: -webkit-fill-available;width: -moz-available; border:0" ; allowfullscreen></iframe>
+<div class="container content">
+    <div class="row margin-bottom-30">
+        <div class="col-md-9 mb-margin-bottom-30">
+            <div class="headline"><h2>İLETİŞİM FORMU</h2></div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <fieldset class="no-padding">
+                    <label>Ad Soyad<span class="color-red">*</span></label>
+                    <div class="row sky-space-20">
+                        <div class="col-md-7 col-md-offset-0">
+                            <div>
+                                <input type="text" name="AdSoyad" id="AdSoyad" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>E-Posta Adresi <span class="color-red">*</span></label>
+                    <div class="row sky-space-20">
+                        <div class="col-md-7 col-md-offset-0">
+                            <div>
+                                <input type="text" name="EPosta" id="EPosta" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>Konu<span class="color-red">*</span></label>
+                    <div class="row sky-space-20">
+                        <div class="col-md-7 col-md-offset-0">
+                            <div>
+                                <input type="text" name="Konu" id="Konu" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>Mesaj İçeriği <span class="color-red">*</span></label>
+                    <div class="row sky-space-20">
+                        <div class="col-md-11 col-md-offset-0">
+                            <div>
+                                <textarea rows="8" name="MesajIcerigi" id="MesajIcerigi" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p><button type="submit" class="btn-u">Onayla</button></p>
+                </fieldset>
+            }
+        </div>
+        <div class="col-md-3">
+            <div class="headline"><h2>İletişim</h2></div>
+            <ul class="list-unstyled who margin-bottom-30">
+                <li><a href="#"><i class="fa fa-home"></i>@genelAyarlar.Adres</a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i>@genelAyarlar.EPosta</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i>@genelAyarlar.Telefon</a></li>
+            </ul>
+            @Html.Raw(genelAyarlar.EkAlan1)
+            @Html.Raw(genelAyarlar.EkAlan2)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model QRWebCMS.Web.Models.Menu
+
+@using (Html.BeginForm("MenuEkle", "Bilesenler", FormMethod.Post))
+{
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Menü Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Baslik, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Baslik, new { htmlAttributes = new { @class = "form-control", placeholder = "Sayfa Başlığı" } })
+                            @Html.ValidationMessageFor(model => model.Baslik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ikon, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            <div class="input-group input-group-button">
+                                @Html.EditorFor(model => model.Ikon, new { htmlAttributes = new { @class = "form-control", placeholder = "İkon" } })
+                                <div class="input-group-append">
+                                    <a href="~/Yonetici/Bilesenler/Ikonlar" class="btn btn-secondary" target="_blank">Ikonlar</a>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Ikon, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sayfa, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.Sayfa)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control", placeholder = "Link" } })
+                            @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Dropdown, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.Dropdown)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Etkin, new { @class = "js-single" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-times"></i> İptal</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="fa fa-check"></i> Onayla</button>
+            </div>
+        </div>
+    </div>
+}

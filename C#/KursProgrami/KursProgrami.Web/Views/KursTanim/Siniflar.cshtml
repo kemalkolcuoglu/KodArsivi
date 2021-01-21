@@ -1,0 +1,85 @@
+﻿@model List<KursProgrami.Model.Sinif>
+@{
+    ViewBag.Title = "Sınıflar";
+}
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Dönemler</h4>
+                </div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="~/Panel/Anasayfa">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Kurs Tanım</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Sınıflar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Sınıf Listesi</h5>
+        <a href="~/KursTanim/SinifEkle" class="btn btn-primary btn-sm waves-effect"><i class="fa fa-plus"></i> Sınıf Ekle</a>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sınıf Adı</th>
+                        <th>Eğitmen</th>
+                        <th>Sınıf Açıklaması</th>
+                        <th>Kontenjan</th>
+                        <th>Etkin</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Etkin)
+                        {
+                            <tr>
+                                <td>@item.SinifAdi</td>
+                                <td>@(item.EgitmenAd + " " + item.EgitmenSoyad)</td>
+                                <td>@item.SinifAciklama</td>
+                                <td>@item.Konteyjan</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/KursTanim/SinifDuzenle/@item.SinifID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#donemSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="table-danger">
+                                <td>@item.SinifAdi</td>
+                                <td>@(item.EgitmenAd + " " + item.EgitmenSoyad)</td>
+                                <td>@item.SinifAciklama</td>
+                                <td>@item.Konteyjan</td>
+                                <td>@(item.Etkin ? "Etkin" : "Etkin Değil")</td>
+                                <td>
+                                    <a href="~/KursTanim/SinifDuzenle/@item.SinifID" class="btn btn-inverse btn-sm waves-effect"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm waves-effect" data-toggle="modal" data-target="#donemSil"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
