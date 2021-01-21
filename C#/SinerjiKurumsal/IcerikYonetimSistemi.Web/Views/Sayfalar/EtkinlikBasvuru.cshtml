@@ -1,0 +1,130 @@
+﻿@model IcerikYonetimSistemi.Web.Models.EtkinlikBasvuru
+
+@{
+	ViewBag.Title = "Etkinlik Başvurusu";
+	IcerikYonetimSistemi.VarlikKatmani.SayfaIcerik icerik = ViewBag.icerik;
+}
+
+@if (TempData["Mesaj"] != null)
+{
+	<div class="alert-success">
+		<p>@TempData["Mesaj"]</p>
+	</div>
+}
+@if (TempData["Hata"] != null)
+{
+	<div class="alert-danger">
+		<p>@TempData["Hata"]</p>
+	</div>
+}
+
+<div class="container margin-top-10">
+	<div class="col-md-5">
+		<a href="../@icerik.Gorsel"><img src="../@icerik.Gorsel" /></a>
+		<h3>@icerik.Baslik</h3>
+		<div>Html.Raw(icerik.Detay)</div>
+	</div>
+	<div class="col-md-7">
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-horizontal">
+				<h4>Etkinlik Başvurusu</h4>
+				<hr />
+				<div class="form-group">
+					@Html.Label("Etkinlik", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.Label(icerik.Baslik, new { htmlAttributes = new { @class = "form-control" } })
+					</div>
+				</div>
+
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<div class="form-group">
+					@Html.LabelFor(model => model.AdSoyad, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.AdSoyad, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.EPosta, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.EPosta, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.EPosta, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.TelefonNo, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.TelefonNo, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.TelefonNo, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@if(icerik.EkAlan2 == "ISO")
+				{
+				<div class="form-group">
+					@Html.LabelFor(model => model.OgrenciSivil, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.OgrenciSivil, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.OgrenciSivil, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.HangiOkul, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.HangiOkul, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.HangiOkul, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.HangiBolum, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.HangiBolum, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.HangiBolum, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Meslek, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Meslek, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Meslek, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				}
+
+				@if(icerik.EkAlan2 == "Psikoloji")
+				{
+				<div class="form-group">
+					@Html.LabelFor(model => model.OgrenciSivil, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.OgrenciSivil, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.OgrenciSivil, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Meslek, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Meslek, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Meslek, "", new { @class = "text-danger" })
+					</div>
+				</div>
+				}
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Başvur" class="btn btn-default" />
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

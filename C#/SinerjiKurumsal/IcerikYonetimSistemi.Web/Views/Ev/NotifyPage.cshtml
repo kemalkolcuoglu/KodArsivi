@@ -1,0 +1,40 @@
+﻿@model IcerikYonetimSistemi.Web.ViewModel.NotifyPageModel
+
+@{
+	ViewBag.Title = Model.SayfaBasligi;
+}
+
+<div class="container" style="margin-top:30px">
+	<div class="col-12 col-sm 12 col-md-12 col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3 class="panel-title"><strong>@Model.Header</strong></h3></div>
+			<div class="panel-body">
+				<h1><span class="@Model.Ikon"></span>@Model.SayfaBasligi</h1>
+				<hr />
+				<p>@Model.SayfaMetni</p>
+				@if (Model.Liste.Count > 0)
+				{
+					<ul>
+						@foreach (var item in Model.Liste)
+						{
+							<li>@item</li>
+						}
+					</ul>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+@if (Model.YonlendirmeEtkin)
+{
+	<script>
+		$(function () {
+			setTimeout(function () {
+				window.location = @Model.YonlendirmeUri;
+			}, 5000);
+		});
+	</script>
+}
+
+

@@ -1,0 +1,33 @@
+﻿
+@{
+	ViewBag.Title = "Dosya Yükle";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+
+
+<div class="container">
+	<h2>Dosya Yükle</h2>
+	@using (Html.BeginForm("DosyaYukle", "Yonetici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+	<div>
+		@Html.TextBox("file", "", new { type = "file" }) <br />
+		<br />
+		<input type="submit" value="Onayla" />
+		<br /><br />
+
+		@if (ViewBag.Message != null)
+		{
+			<div class="alert alert-success">
+				<strong>@ViewBag.Message</strong>
+			</div>
+		}
+		else if (ViewBag.Hata != null)
+		{
+			<div class="alert alert-danger">
+				<strong>@ViewBag.Hata</strong>
+			</div>
+		}
+	</div>
+	}
+</div>

@@ -1,0 +1,29 @@
+﻿@using IcerikYonetimSistemi.VarlikKatmani
+@model Sayfalar
+@{
+	ViewBag.Title = Model.SayfaBasligi;
+}
+
+<h2>@Model.SayfaBasligi</h2>
+
+
+@if (Model.SayfaIcerik == null || Model.SayfaIcerik.Count == 0)
+{
+
+}
+else
+{
+
+	foreach (var item in Model.SayfaIcerik)
+	{
+		<div class="col-md-4">
+			<img src="@item.Gorsel" alt="@item.Baslik" />
+			<h3>@item.Baslik</h3>
+			<hr />
+			<p>@item.Detay.Substring(0,250)</p>
+			@Html.ActionLink("Devamını Oku", "SayfaIcerik", new { sayfaId = item.SayfaID, icerikId = item.SayfaIcerikID }, new { @class="btn btn-dark"})
+		</div>
+	}
+
+}
+

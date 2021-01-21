@@ -1,0 +1,125 @@
+﻿@using System.Web.Optimization
+@model List<IcerikYonetimSistemi.VarlikKatmani.FotografGaleri>
+@{
+	ViewBag.Title = "Fotoğraf Galerisi";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+@Styles.Render("~/Styles/FotoContent")
+
+@*<div class="container">
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-table"></i>
+				Bilgiler
+				<a href="~/Yonetici/FotografGaleriEkle" class="btn btn-dark">Fotograf Ekle</a>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Başlık</th>
+								<th>Detay</th>
+								<th>Görsel</th>
+								<th>Etkin</th>
+								<th>Görüntüle</th>
+								<th>Düzenle</th>
+								<th>Sil</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>ID</th>
+								<th>Başlık</th>
+								<th>Detay</th>
+								<th>Görsel</th>
+								<th>Etkin</th>
+								<th>Görüntüle</th>
+								<th>Düzenle</th>
+								<th>Sil</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td>@item.GorselID</td>
+									<td>@item.Baslik</td>
+									<td>@item.Detay.Substring(0, 100)</td>
+									<td><img src="@item.Adres" alt="Alternate Text" width="%25" /></td>
+									<td>@item.Etkin</td>
+									<td>@Html.ActionLink("G", "FotografGaleri", new { item.GorselID }, new { @class = "btn btn-primary" })</td>
+									<td>@Html.ActionLink("D", "FotografDuzenle", new { item.GorselID }, new { @class = "btn btn-success" })</td>
+									<td>@Html.ActionLink("S", "FotografSil", new { item.GorselID }, new { @class = "btn btn-danger" })</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		</div>
+	</div>*@
+<div class="container">
+	<form action="/api/upload" enctype="multipart/form-data">
+		<div class="row fileupload-buttonbar">
+			<div class="span7">
+				<div class="well">
+					<i class="icon-plus"></i><span>&nbsp;&nbsp;Add files...</span>
+					<input type="file" id="fileupload" name="fileupload" accept="image/*" multiple="multiple">
+					<button id="btnUploadAll" class="btn btn-success pull-right" type="button">
+						Upload All
+					</button>
+					<div class="clearfix">
+					</div>
+					<div class="progress">
+						<div class="bar" id="overallbar" style="width: 0%">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="span7">
+				<div class="well hide" id="filelistholder">
+				</div>
+			</div>
+			<div class="span7">
+			</div>
+		</div>
+	</form>
+</div>
+
+@Scripts.Render("~/Scripts/FotoScript")
+
+<script type="text/javascript">
+	$(function () {
+		$('#fileupload').fileupload({
+			dataType: "json",
+			url: "/api/upload",
+			limitConcurrentUploads: 1,
+			sequentialUploads: true,
+			progressInterval: 100,
+			/*maxChunkSize: 10000,*/
+			add: function (e, data) {
+				$('#filelistholder').removeClass('hide');
+				data.context = $('<div />').text(data.files[0].name).appendTo('#filelistholder');
+				$('</div><div class="progress"><div class="bar" style="width:0%"></div></div>').appendTo(data.context);
+				$('#btnUploadAll').click(function () {
+					data.submit();
+				});
+			},
+			done: function (e, data) {
+				data.context.text(data.files[0].name + '... Completed');
+				$('</div><div class="progress"><div class="bar" style="width:100%"></div></div>').appendTo(data.context);
+			},
+			progressall: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('#overallbar').css('width', progress + '%');
+			},
+			progress: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				data.context.find('.bar').css('width', progress + '%');
+			}
+		});
+	});
+</script>

@@ -1,0 +1,50 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.SayfaIcerik>
+<div class="card mb-3">
+	<div class="card-header">
+		<i class="fas fa-table"></i>
+		Bilgiler | @Html.ActionLink("Sayfa İçeriği Oluştur", "SayfaIcerikOlustur", new { sayfaId = ViewBag.sayfaId }, new { @class = "btn btn-dark" })
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Başlık</th>
+						<th>Etkin</th>
+						<th>Alt İçerik Sayısı</th>
+						<th>Görüntüle</th>
+						<th>Düzenle</th>
+						<th>Sil</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>ID</th>
+						<th>Başlık</th>
+						<th>Etkin</th>
+						<th>Alt İçerik Sayısı</th>
+						<th>Görüntüle</th>
+						<th>Düzenle</th>
+						<th>Sil</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var item in Model)
+					{
+					<tr>
+						<td>@item.SayfaIcerikID</td>
+						<td>@item.Baslik</td>
+						<td>@(item.Etkin ? "Evet" : "Hayır")</td>
+						<td>@item.SayfaAltIcerik.Count</td>
+						<td>@Html.ActionLink("G", "SayfaIcerik", new { sayfaId = item.SayfaID, icerikId = item.SayfaIcerikID }, new { @class = "btn btn-sm btn-info" })</td>
+						<td>@Html.ActionLink("D", "SayfaIcerikDuzenle", new { sayfaId = item.SayfaID, icerikId = item.SayfaIcerikID }, new { @class = "btn btn-sm btn-primary" })</td>
+						<td>@Html.ActionLink("S", "SayfaIcerikSil", new { sayfaId = item.SayfaID, icerikId = item.SayfaIcerikID }, new { @class = "btn btn-sm btn-danger" })</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

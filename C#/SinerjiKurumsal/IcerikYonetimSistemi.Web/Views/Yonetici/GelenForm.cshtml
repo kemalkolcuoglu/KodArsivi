@@ -1,0 +1,40 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.Formlar
+
+@{
+    ViewBag.Title = "TekForm";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+	<h4>Gelen Form</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.AdSoyad)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.AdSoyad)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.EPosta)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.EPosta)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.MesajIcerigi)
+		</dt>
+
+		<dd>
+			@Html.Raw(Model.MesajIcerigi)
+		</dd>
+	</dl>
+	<p>
+		@Html.ActionLink("Listeye Dön", "GelenFormlar")
+	</p>
+</div>
+

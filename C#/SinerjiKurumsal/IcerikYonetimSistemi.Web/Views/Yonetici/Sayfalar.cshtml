@@ -1,0 +1,57 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.Sayfalar>
+@{
+	ViewBag.Title = "Sayfalar";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+<div class="container">
+	<div class="card mb-3">
+		<div class="card-header">
+			<i class="fas fa-table"></i>
+			Bilgiler
+			<a href="~/Yonetici/SayfaOlustur" class="btn btn-dark">Sayfa Oluştur</a>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Sayfa Adı</th>
+							<th>Etkin</th>
+							<th>İçerik Sayısı</th>
+							<th>Detay</th>
+							<th>Düzenle</th>
+							<th>Sil</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>ID</th>
+							<th>Sayfa Adı</th>
+							<th>Etkin</th>
+							<th>İçerik Sayısı</th>
+							<th>Detay</th>
+							<th>Düzenle</th>
+							<th>Sil</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.SayfaID</td>
+								<td>@item.SayfaBasligi</td>
+								<td>@item.Etkin</td>
+								<td>@item.SayfaIcerik.Count</td>
+								<td>@Html.ActionLink("G", "Sayfa", new { sayfaId = item.SayfaID }, new { @class = "btn btn-primary" })</td>
+								<td>@Html.ActionLink("D", "SayfaDuzenle", new { sayfaId = item.SayfaID }, new { @class = "btn btn-success" })</td>
+								<td>@Html.ActionLink("S", "SayfaSil", new { sayfaId = item.SayfaID }, new { @class = "btn btn-danger" })</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+	</div>
+</div>

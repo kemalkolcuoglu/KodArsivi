@@ -1,0 +1,96 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.SayfaAltIcerik
+
+@{
+    ViewBag.Title = "SayfaAltIcerikSil";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div>
+	<h4>Sayfa Alt Icerik</h4>
+	<hr />
+	<p>Sayfa silinecek. Silmek istediğinizden emin misiniz?</p>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.EkAlan1)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.EkAlan1)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.EkAlan2)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.EkAlan2)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.OlusturmaTarihi)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.OlusturmaTarihi)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.DuzenlemeTarihi)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.DuzenlemeTarihi)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Ikon)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Ikon)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Etkin)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Etkin)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Baslik)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Baslik)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Detay)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Detay)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Gorsel)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Gorsel)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Sil" class="btn btn-default" /> |
+		</div>
+	}
+</div>

@@ -1,0 +1,56 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.FotografGaleri>
+@{
+	ViewBag.Title = "GorselYukle";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+	<h2>Görsel Yükle</h2>
+	@if (TempData["Mesaj"] != null)
+	{
+		<div class="alert alert-info">
+			<strong>@TempData["Mesaj"]</strong>
+		</div>
+	}
+
+	<div class="alert alert-warning">
+		<strong>Lütfen jpg, jpeg ya da png uzantılı dosyalar yükleyiniz!</strong>
+	</div>
+	@using (Html.BeginForm("GorselYukle", "Yonetici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		<div>
+			@Html.TextBox("fotograf", "", new { type = "file" }) <br />
+			<br />
+			<input type="submit" value="Onayla" />
+			<br /><br />
+
+			@if (ViewBag.Message != null)
+			{
+				<div class="alert alert-success">
+					<strong>@ViewBag.Message</strong>
+				</div>
+			}
+			else if (ViewBag.Hata != null)
+			{
+				<div class="alert alert-danger">
+					<strong>@ViewBag.Hata</strong>
+				</div>
+			}
+		</div>
+	}
+</div>
+<hr />
+<div class="container margin-bottom-10" >
+	<h2>Görsel Listesi</h2>
+	<div class="row">
+		@foreach (var items in Model)
+		{
+			<div class="col-md-3">
+				<img src="../@items.Adres" width="200px" height="200px" style="padding:5px 5px;" />
+				<hr />
+				<h5>@items.Baslik</h5>
+				@Html.ActionLink("Sil", "GorselSil", new { id = items.GorselID }, new { @class = "btn btn-danger btn-sm" })
+			</div>
+		}
+	</div>
+</div>

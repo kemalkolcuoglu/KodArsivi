@@ -1,0 +1,24 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.SayfaAltIcerik
+
+@{
+	ViewBag.Title = "Sayfa Alt İçerik";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+	<h2>@Model.Baslik</h2>
+	<hr />
+	<ul class="list-group">
+		<li class="list-group-item"><b>Sayfa ID:</b> @Model.SayfaID</li>
+		<li class="list-group-item"><b>İçerik ID:</b> @Model.SayfaIcerikID</li>
+		<li class="list-group-item"><b>ID:</b> @Model.SayfaAltIcerikID</li>
+		<li class="list-group-item"><b>Başlık:</b> @Model.Baslik</li>
+		<li class="list-group-item"><b>Etkin:</b> @(Model.Etkin ? "Evet" : "Hayır")</li>
+		<li class="list-group-item"><b>Ikon:</b> @(Model.Ikon == null ? "Yok" : Model.Ikon)</li>
+		<li class="list-group-item"><b>Oluşturma Tarihi:</b> @Model.OlusturmaTarihi</li>
+		<li class="list-group-item">
+			@Html.ActionLink("Alt İçeriği Düzenle", "SayfaAltIcerikDuzenle", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID, altId = Model.SayfaAltIcerikID }, new { @class = "btn btn-outline-dark" })
+			@Html.ActionLink("Alt İçeriği Sil", "SayfaAltIcerikSil", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID, altId = Model.SayfaAltIcerikID }, new { @class = "btn btn-outline-danger" })
+		</li>
+	</ul>
+</div>

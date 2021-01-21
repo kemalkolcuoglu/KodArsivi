@@ -1,0 +1,61 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.FotografGaleri>
+@{
+    ViewBag.Title = "Fotoğraf Galerisi";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+	<div class="card mb-3">
+		<div class="card-header">
+			<i class="fas fa-table"></i>
+			Bilgiler
+			<a href="~/Yonetici/FotografGaleriEkle" class="btn btn-dark">Fotograf Ekle</a>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Başlık</th>
+							<th>Detay</th>
+							<th>Görsel</th>
+							<th>Etkin</th>
+							<th>Görüntüle</th>
+							<th>Düzenle</th>
+							<th>Sil</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>ID</th>
+							<th>Başlık</th>
+							<th>Detay</th>
+							<th>Görsel</th>
+							<th>Etkin</th>
+							<th>Görüntüle</th>
+							<th>Düzenle</th>
+							<th>Sil</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.GorselID</td>
+								<td>@item.Baslik</td>
+								<td>@item.Detay.Substring(0,100)</td>
+								<td><img src="@item.Adres" alt="Alternate Text" width="%25" /></td>
+								<td>@item.Etkin</td>
+								<td>@Html.ActionLink("G", "FotografGaleri", new { item.GorselID }, new { @class = "btn btn-primary" })</td>
+								<td>@Html.ActionLink("D", "FotografDuzenle", new { item.GorselID }, new { @class = "btn btn-success" })</td>
+								<td>@Html.ActionLink("S", "FotografSil", new { item.GorselID }, new { @class = "btn btn-danger" })</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+	</div>
+</div>

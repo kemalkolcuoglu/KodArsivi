@@ -1,0 +1,33 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.SayfaIcerik
+
+@{
+    ViewBag.Title = "Sayfa İçerik";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+    <h2>@Model.Baslik</h2>
+    <hr />
+	<ul class="list-group">
+		<li class="list-group-item"><b>Sayfa ID:</b> @Model.SayfaID</li>
+		<li class="list-group-item"><b>İçerik ID:</b> @Model.SayfaIcerikID</li>
+		<li class="list-group-item"><b>Başlık:</b> @Model.Baslik</li>
+		<li class="list-group-item"><b>Etkin:</b> @(Model.Etkin ? "Evet" : "Hayır")</li>
+		<li class="list-group-item"><b>Yorum:</b> @(Model.Yorum ? "Evet" : "Hayır")</li>
+		<li class="list-group-item"><b>Ikon:</b> @(Model.Ikon == null ? "Yok" : Model.Ikon)</li>
+		<li class="list-group-item"><b>Oluşturma Tarihi:</b> @Model.OlusturmaTarihi</li>
+		<li class="list-group-item">
+			@Html.ActionLink("İçeriği Düzenle", "SayfaIcerikDuzenle", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID }, new { @class = "btn btn-outline-dark" })
+			@Html.ActionLink("İçeriği Sil", "SayfaIcerikSil", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID }, new { @class = "btn btn-outline-danger" })
+		</li>
+	</ul>
+
+	@Html.Action("SayfaAltIcerik", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID });
+	<hr />
+	@*@Html.Action("SayfaIcerikGaleri", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID });*@
+	<hr />
+	@if(Model.Yorum)
+	{
+		Html.Action("SayfaIcerikYorum", new { sayfaId = Model.SayfaID, icerikId = Model.SayfaIcerikID });
+	}
+</div>

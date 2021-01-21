@@ -1,0 +1,67 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.Formlar
+
+@{
+	ViewBag.Title = "İletişim";
+}
+
+<div class="container margin-top-10">
+	@if (ViewBag.Mesaj != null)
+	{
+		<div class="alert alert-success">
+			<strong>@ViewBag.Mesaj</strong>
+		</div>
+	}
+	<div class="col-md-6">
+		<h3>Ankara</h3>
+		<p><b>Telefon:</b> 0532 680 34 35</p>
+		<p><b>E-Posta: </b><a href="mailto:info@sinerjikurumsal.com">info@sinerjikurumsal.com</a></p>
+		<p><b>Adres:</b> Ziyabey Cad. 1419. Sok. No:7/7 06520 Çankaya/ANKARA</p>
+	</div>
+	<div class="col-md-6">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500.225215738245!2d32.81693877483357!3d39.90985095366294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f48b6fb454f%3A0xeec02f5b512ab52c!2sBalgat+Mahallesi%2C+1419.+Sk.+No%3A7+D%3A7%2C+06520+%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1534540975407" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+	<div class="col-md-12">
+		<hr />
+		<br />
+		<h3 class="text-center">İletişim Formu</h3>
+		<p class="text-center"><b>Her türlü görüş, öneri ve teklif için bize ulaşabilirsiniz!</b></p>
+		<br />
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-horizontal">
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<div class="form-group">
+					@Html.LabelFor(model => model.AdSoyad, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.AdSoyad, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.AdSoyad, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.EPosta, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.EPosta, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.EPosta, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.MesajIcerigi, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.TextAreaFor(model => model.MesajIcerigi, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.MesajIcerigi, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="wrap-submit text-center">
+						<input type="submit" value="Gönder" class="btn btn-default" />
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

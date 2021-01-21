@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcerikYonetimSistemi.Web", "IcerikYonetimSistemi.Web\IcerikYonetimSistemi.Web.csproj", "{D7E8D84D-E30F-49FE-A9D2-32CAA2BB9CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcerikYonetimSistemi.VarlikKatmani", "IcerikYonetimSistemi.VarlikKatmani\IcerikYonetimSistemi.VarlikKatmani.csproj", "{63E71FBF-C6DE-4343-BBC4-214CE285943D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcerikYonetimSistemi.VeriErisimKatmani", "IcerikYonetimSistemi.VeriErisimKatmani\IcerikYonetimSistemi.VeriErisimKatmani.csproj", "{C03B845B-358B-4224-893A-47A2490C75A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcerikYonetimSistemi.IslemKatmani", "IcerikYonetimSistemi.IslemKatmani\IcerikYonetimSistemi.IslemKatmani.csproj", "{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IcerikYonetimSistemi.OrtakKatman", "IcerikYonetimSistemi.OrtakKatman\IcerikYonetimSistemi.OrtakKatman.csproj", "{467DF9E6-952C-46DE-B690-9C104F29C0C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7E8D84D-E30F-49FE-A9D2-32CAA2BB9CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E8D84D-E30F-49FE-A9D2-32CAA2BB9CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E8D84D-E30F-49FE-A9D2-32CAA2BB9CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E8D84D-E30F-49FE-A9D2-32CAA2BB9CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E71FBF-C6DE-4343-BBC4-214CE285943D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E71FBF-C6DE-4343-BBC4-214CE285943D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E71FBF-C6DE-4343-BBC4-214CE285943D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E71FBF-C6DE-4343-BBC4-214CE285943D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03B845B-358B-4224-893A-47A2490C75A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03B845B-358B-4224-893A-47A2490C75A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03B845B-358B-4224-893A-47A2490C75A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03B845B-358B-4224-893A-47A2490C75A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467DF9E6-952C-46DE-B690-9C104F29C0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467DF9E6-952C-46DE-B690-9C104F29C0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467DF9E6-952C-46DE-B690-9C104F29C0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467DF9E6-952C-46DE-B690-9C104F29C0C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09AE87F5-C90C-4431-8670-54F59DED3B8D}
+	EndGlobalSection
+EndGlobal

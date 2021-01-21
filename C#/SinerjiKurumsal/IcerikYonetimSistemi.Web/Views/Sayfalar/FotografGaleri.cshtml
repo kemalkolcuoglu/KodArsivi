@@ -1,0 +1,14 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.SayfaAltIcerik>
+@{
+    ViewBag.Title = "Fotoğraf Galeri";
+}
+
+<div class="container text-center margin-top-10">
+	<h2>@Model[0].SayfaIcerik.Baslik</h2>
+	@foreach (var items in Model)
+	{
+		<div class="col-md-4 margin-bottom-15">
+			<img src="../@items.Gorsel" />
+		</div>
+	}
+</div>

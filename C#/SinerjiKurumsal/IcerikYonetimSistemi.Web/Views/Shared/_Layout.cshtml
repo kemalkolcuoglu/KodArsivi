@@ -1,0 +1,238 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - İçerik Yönetim Sistemi</title>
+
+	<link rel="stylesheet" type="text/css" href="~/Content/style.css">
+	@*<link href="~/Content/fontawesome/font-awesome.min.css" rel="stylesheet" />*@
+	@Styles.Render("~/Content/fontawesome")
+</head>
+<body class="front-page header-style-2 menu-has-search menu-has-cart header-fixed">
+	@{
+		IcerikYonetimSistemi.IslemKatmani.SayfaIslemleri si = new IcerikYonetimSistemi.IslemKatmani.SayfaIslemleri();
+	}
+
+	<div id="wrapper" class="animsition">
+		<div id="page" class="clearfix">
+			<!-- Header Wrap -->
+			<div id="site-header-wrap">
+				<!-- Header -->
+				<header id="site-header">
+					<div id="site-header-inner" class="container clearfix">
+						<div class="wrap-inner">
+							<div id="site-logo" class="clearfix">
+								<div id="site-logo-inner">
+									<a href="~/Ev/Anasayfa" title="Sinerji Kurumsal" rel="home" class="main-logo">
+										<img src="~/Images/logo.png" width="198" height="44" alt="Logo" data-retina="~/Images/logo@2x.png" data-width="198" data-height="44">
+									</a>
+								</div>
+							</div><!-- /#site-logo -->
+
+							<div class="mobile-button"><span></span></div><!-- //mobile menu button -->
+
+							<div id="header-aside">
+								<div class="wprt-info">
+									<div class="inner">
+										<div class="phone">
+											<div class="info-wrap">
+												<div class="info-i"><span><i class="fa fa-phone"></i></span></div>
+
+												<div class="info-c">
+													<span class="font-heading">+90 555 840 36 30</span>
+													<br>info@sinerjikurumsal.com
+												</div>
+											</div>
+										</div>
+
+										<div class="address">
+											<div class="info-wrap">
+												<div class="info-i"><span><i class="fa fa-map-marker"></i></span></div>
+
+												<div class="info-c">
+													<span class="font-heading">Remzi Oğuz Arık Mah. Tunalı Hilmi Cad.</span>
+													<br>No: 94/11 Çankaya/ANKARA
+												</div>
+											</div>
+										</div>
+
+										<div class="header-btn">
+											<div class="btn-wrap">
+												<a href="~/Sayfalar/Basvurular" class="wprt-button">Başvurular</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /#site-header-inner -->
+
+					<div class="site-navigation-wrap">
+						<div class="container clearfix">
+							<div class="inner">
+								<nav id="main-nav" class="main-nav">
+									<ul>
+										<li>
+											<a href="~/">Anasayfa</a>
+										</li>
+										@foreach (var items in si.VeriListesi(x => x.Etkin))
+										{
+											if (items.SayfaIcerik.Count > 1)
+											{
+												<li class="current-menu-item menu-item-has-children">
+													<a href="~/Sayfalar/Sayfa/@items.SayfaID">@items.SayfaBasligi</a>
+													<ul>
+														@foreach (var icerik in items.SayfaIcerik)
+														{
+
+															<li><a href="~/Sayfalar/Icerik/@icerik.SayfaIcerikID">@icerik.Baslik</a></li>
+														}
+													</ul>
+												</li>
+											}
+											else
+											{
+												<li>
+													<a href="~/Sayfalar/Sayfa/@items.SayfaID">@items.SayfaBasligi</a>
+												</li>
+											}
+										}
+										<li>
+											<a href="~/Sayfalar/Iletisim">İletişim</a>
+										</li>
+									</ul>
+								</nav><!-- /#main-nav -->
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- /Header -->
+			</div>
+			<!-- /Header Wrap -->
+			@*----------------------------------Ana Öğe-------------------------------------*@
+			@RenderBody()
+			@*----------------------------------Ana Öğe-------------------------------------*@
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div id="footer-widgets">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 col-sm-6">
+								<div class="widget widget_text">
+									<div class="textwidget">
+										<img src="~/Images/logo.png" alt="logo">
+									</div>
+								</div>
+
+								<div class="wprt-spacer" data-desktop="24" data-mobi="24" data-smobi="20"></div>
+
+								<div class="widget widget_text">
+									©2018 - Sinerji Kurumsal Bütün Hakları Saklıdır.
+								</div>
+
+								<div class="wprt-spacer" data-desktop="0" data-mobi="25" data-smobi="25"></div>
+							</div>
+
+							<div class="col-md-4 col-sm-6">
+								<div class="widget widget_spacer">
+									<div class="spacer clearfix" data-desktop="5" data-mobi="0"></div>
+								</div>
+
+								<div class="widget widget_text">
+									<h1 class="widget-title"><span>Ankara</span></h1>
+								</div>
+
+								<div class="widget widget_text">
+									<p class="text-1">Telefon: </p>
+									<p class="text-2">+90 555 840 36 30</p>
+									<p class="text-1">E-Posta: </p>
+									<p class="text-2"><a href="mailto:info@sinerjikurumsal.com">info@sinerjikurumsal.com</a></p>
+								</div>
+
+								<div class="widget widget_text">
+									<p class="text-1">Adres: </p>
+									<p class="text-2">Remzi Oğuz Arık Mah. Tunalı Hilmi Cad. No: 94/11 Çankaya/ANKARA</p>
+								</div>
+
+								<div class="wprt-spacer" data-desktop="0" data-mobi="25" data-smobi="25"></div>
+							</div>
+
+							<div class="col-md-4 col-sm-6">
+								<div class="widget widget_spacer">
+									<div class="spacer clearfix" data-desktop="6" data-mobi="0"></div>
+								</div>
+
+								<div class="widget widget_text">
+									Abone olarak gelişmelerden haberdar olabilirsiniz.
+								</div>
+
+								<div class="spacer clearfix" data-desktop="14" data-mobi="10" data-smobi="10"></div>
+
+								<div id="widget_information-2" class="widget widget_information">
+
+									<form action="#" method="get" class="wpcf7-form" novalidate="novalidate">
+										<input type="email" name="your-email" class="wpcf7-email" aria-required="true" placeholder="E-Posta: ...">
+										<button type="submit" class="wpcf7-submit">Abone Ol</button>
+									</form>
+								</div>
+
+								<div class="spacer clearfix" data-desktop="14" data-mobi="10" data-smobi="10"></div>
+
+								<div class="widget widget_socials align-center">
+									<div class="socials style-2 clearfix">
+										<div class="icon col-md-offset-1">
+											<a target="_blank" href="http://www.instagram.com/sinerjiofficial">
+												<i class="fa fa-instagram"></i>
+											</a>
+										</div>
+										<div class="icon col-md-offset-1">
+											<a target="_blank" href="http://www.facebook.com/sinerjikurumsal">
+												<i class="fa fa-facebook"></i>
+											</a>
+										</div>
+
+										<div class="icon col-md-offset-1">
+											<a target="_blank" href="http://www.twitter.com/sinerjikampus">
+												<i class="fa fa-twitter"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div><!-- /.row -->
+					</div>
+				</div><!-- /#footer-widgets -->
+			</footer>
+			<!-- /Footer -->
+		</div><!-- /#page -->
+	</div><!-- /#wrapper -->
+
+	<a id="scroll-top"></a>
+
+	@Scripts.Render("~/Scripts/Base")
+
+	@*<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/animsition.js"></script>
+		<script type="text/javascript" src="~/Scripts/waypoint.js"></script>
+		<script type="text/javascript" src="~/Scripts/parallax.js"></script>
+		<script type="text/javascript" src="~/Scripts/matchMedia.js"></script>
+		<script type="text/javascript" src="~/Scripts/fitvids.js"></script>
+		<script type="text/javascript" src="~/Scripts/easing.js"></script>
+		<script type="text/javascript" src="~/Scripts/countTo.js"></script>
+		<script type="text/javascript" src="~/Scripts/owl.carousel.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/cubeportfolio.js"></script>
+		<script type="text/javascript" src="~/Scripts/magnific.popup.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/gmap3.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/validate.js"></script>
+		<script type="text/javascript" src="~/Scripts/shortcodes.js"></script>
+		<script type="text/javascript" src="~/Scripts/main.js"></script>
+
+		<script type="text/javascript" src="~/Scripts/jquery.themepunch.tools.min.js"></script>
+		<script type="text/javascript" src="~/Scripts/jquery.themepunch.revolution.min.js"></script>*@
+</body>
+</html>

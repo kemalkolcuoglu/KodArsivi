@@ -1,0 +1,73 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.SayfaIcerik
+@{
+	ViewBag.Title = Model.Baslik;
+}
+<div class="container margin-top-10 margin-bottom-10">
+	@if (Model.Gorsel != null)
+	{
+		<div class="col-4 col-sm-4 col-md-4 col-lg-4">
+			<img src="../@Model.Gorsel" />
+		</div>
+		<div class="col-8 col-sm-8 col-md-8 col-lg-8">
+			<h2>@Model.Baslik</h2>
+			<hr />
+			@Html.Raw(Model.Detay)
+
+			@if(Model.SayfaAltIcerik.Count > 0)
+			{
+			<ul>
+				@foreach(var items in Model.SayfaAltIcerik)
+				{
+					<li>@items.Baslik</li>
+				}
+			</ul>
+			}
+		</div>
+	}
+	else
+	{
+		foreach (var items in Model.SayfaAltIcerik)
+		{
+			<div class="col-md-4 margin-bottom-15" >
+				<img src="../@items.Gorsel" style="width: auto"/>
+			</div>
+		}
+	}
+
+</div>
+
+@if (Model.Yorum)
+{
+	<div class="container">
+		@*@using (Html.BeginForm())
+			{
+				@Html.AntiForgeryToken()
+				@IcerikYonetimSistemi.VarlikKatmani.SayfaIcerikYorum yorum = new IcerikYonetimSistemi.VarlikKatmani.SayfaIcerikYorum();
+
+				<div class="form-horizontal">
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					<div class="form-group">
+						@Html.LabelFor(model => model.SayfaIcerikYorum, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.SayfaIcerikYorumMetini, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.SayfaIcerikYorumMetini, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.SayfaIcerikYorumMetini, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.SayfaIcerikYorumMetini, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.SayfaIcerikYorumMetini, "", new { @class = "text-danger" })
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" value="Gönder" class="btn btn-default" />
+						</div>
+					</div>
+				</div>
+			}*@
+	</div>
+}

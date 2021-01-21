@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8CAAC022-FE7E-46A9-84D4-287BBDA76D06}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IcerikYonetimSistemi.IslemKatmani</RootNamespace>
+    <AssemblyName>IcerikYonetimSistemi.IslemKatmani</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.12\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormIslemleri.cs" />
+    <Compile Include="FotografGaleriIslemleri.cs" />
+    <Compile Include="IslemKatmaniOgesi.cs" />
+    <Compile Include="KullaniciIslemleri.cs" />
+    <Compile Include="KullaniciYetkiIslemleri.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SayfaAltIcerikIslemleri.cs" />
+    <Compile Include="SayfaIcerikGaleriIslemleri.cs" />
+    <Compile Include="SayfaIcerikIslemleri.cs" />
+    <Compile Include="SayfaIcerikYorumIslemleri.cs" />
+    <Compile Include="SayfaIslemleri.cs" />
+    <Compile Include="TemelIslemler.cs" />
+    <Compile Include="Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IcerikYonetimSistemi.OrtakKatman\IcerikYonetimSistemi.OrtakKatman.csproj">
+      <Project>{467df9e6-952c-46de-b690-9c104f29c0c0}</Project>
+      <Name>IcerikYonetimSistemi.OrtakKatman</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IcerikYonetimSistemi.VarlikKatmani\IcerikYonetimSistemi.VarlikKatmani.csproj">
+      <Project>{63e71fbf-c6de-4343-bbc4-214ce285943d}</Project>
+      <Name>IcerikYonetimSistemi.VarlikKatmani</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IcerikYonetimSistemi.VeriErisimKatmani\IcerikYonetimSistemi.VeriErisimKatmani.csproj">
+      <Project>{c03b845b-358b-4224-893a-47a2490c75a5}</Project>
+      <Name>IcerikYonetimSistemi.VeriErisimKatmani</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

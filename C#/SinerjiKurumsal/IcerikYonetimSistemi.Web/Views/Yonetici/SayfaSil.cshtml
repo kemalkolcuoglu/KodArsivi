@@ -1,0 +1,50 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.Sayfalar
+
+@{
+    ViewBag.Title = "SayfaSil";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="container">
+	<h2>Sayfa Sil</h2>
+
+	<p>Sayfa silinecek. Silmek istediğinizden emin misiniz?</p>
+	<div>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayNameFor(model => model.SayfaBasligi)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.SayfaBasligi)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.Ikon)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Ikon)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.Etkin)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Etkin)
+			</dd>
+
+		</dl>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-actions no-color">
+				<input type="submit" value="Sil" class="btn btn-default" />
+			</div>
+		}
+	</div>
+</div>

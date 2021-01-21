@@ -1,0 +1,24 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.Sayfalar
+@{
+	ViewBag.Title = "Sayfa";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+<div class="container">
+	<div class="col-md-12">
+		<h2>@Model.SayfaBasligi</h2>
+		<hr />
+		<ul class="list-group">
+			<li class="list-group-item"><b>Sayfa ID:</b> @Model.SayfaID</li>
+			<li class="list-group-item"><b>Sayfa Adı:</b> @Model.SayfaBasligi</li>
+			<li class="list-group-item"><b>Sayfa İkonu:</b> @(Model.Ikon == null ? "Yok" : Model.Ikon)</li>
+			<li class="list-group-item"><b>Etkin:</b> @(Model.Etkin ? "Evet" : "Hayır")</li>
+			<li class="list-group-item">
+				@Html.ActionLink("Sayfayı Düzenle", "SayfaDuzenle", new { sayfaId = Model.SayfaID }, new { @class = "btn btn-outline-dark" })
+				@Html.ActionLink("Sayfayı Sil", "SayfaSil", new { sayfaId = Model.SayfaID }, new { @class = "btn btn-outline-danger" })
+			</li>
+		</ul>
+		<hr />
+		@Html.Action("SayfaIcerik", new { sayfaId = Model.SayfaID })
+	</div>
+</div>
+

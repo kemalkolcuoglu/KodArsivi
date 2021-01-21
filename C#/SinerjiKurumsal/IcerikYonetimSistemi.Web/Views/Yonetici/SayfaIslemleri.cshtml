@@ -1,0 +1,52 @@
+﻿@model IcerikYonetimSistemi.VarlikKatmani.Sayfalar
+
+@{
+    ViewBag.Title = "SayfaIslemleri";
+    Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+<div class="container">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<h4>Sayfalar</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.SayfaBasligi, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.SayfaBasligi, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.SayfaBasligi, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Ikon, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Ikon, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Ikon, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Etkin, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.EditorFor(model => model.Etkin)
+					@Html.ValidationMessageFor(model => model.Etkin, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Kaydet" class="btn btn-default" />
+			</div>
+		</div>
+
+	}
+
+	<div>
+		@Html.ActionLink("Listeye Dön", "Sayfalar")
+	</div>
+</div>

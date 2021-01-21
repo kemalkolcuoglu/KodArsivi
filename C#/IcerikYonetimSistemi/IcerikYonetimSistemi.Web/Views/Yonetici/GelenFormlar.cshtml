@@ -1,0 +1,52 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.Formlar>
+@{
+	ViewBag.Title = "GelenFormlar";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="card mb-3">
+	<div class="card-header">
+		<i class="fas fa-table"></i>
+		Bilgiler
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Form ID</th>
+						<th>Gönderen</th>
+						<th>E-Posta</th>
+						<th>Mesaj İçeriği</th>
+						<th>Görüntüle</th>
+						<th>Sil</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Form ID</th>
+						<th>Gönderen</th>
+						<th>E-Posta</th>
+						<th>Mesaj İçeriği</th>
+						<th>Görüntüle</th>
+						<th>Sil</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.FormID</td>
+							<td>@item.AdSoyad</td>
+							<td>@item.EPosta</td>
+							<td>@item.MesajIcerigi</td>
+							<td><a href="~/Yonetici/GelenForm/@item.FormID" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-file"></span></a></td>
+							<td><a href="~/Yonetici/FormSil/@item.FormID" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>

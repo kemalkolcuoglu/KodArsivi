@@ -1,0 +1,55 @@
+﻿@model List<IcerikYonetimSistemi.VarlikKatmani.Kullanici>
+@{
+	ViewBag.Title = "Kullanici";
+	Layout = "~/Views/Shared/YoneticiLayout.cshtml";
+}
+
+<div class="card mb-3">
+	<div class="card-header">
+		<i class="fas fa-table"></i>
+		Bilgiler
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Kullanıcı ID</th>
+						<th>Kullanıcı Yetkisi</th>
+						<th>Kullanıcı Adı</th>
+						<th>Etkin</th>
+						<th>Görüntüle</th>
+						<th>Düzenle</th>
+						<th>Sil</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Kullanıcı ID</th>
+						<th>Kullanıcı Yetkisi</th>
+						<th>Kullanıcı Adı</th>
+						<th>Etkin</th>
+						<th>Görüntüle</th>
+						<th>Düzenle</th>
+						<th>Sil</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.KullaniciID</td>
+							<td>@item.KullaniciYetkiID</td>
+							<td>@item.KullaniciAdi</td>
+							<td>@item.Etkin</td>
+							<td><a href="~/Yonetici/Kullanici/@item.KullaniciID" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-file"></span></a></td>
+							<td><a href="~/Yonetici/KullaniciDuzenle/@item.KullaniciID" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></a></td>
+							<td><a href="~/Yonetici/KullaniciSil/@item.KullaniciID" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>

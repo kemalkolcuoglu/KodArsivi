@@ -1,0 +1,367 @@
+﻿
+@{
+	ViewBag.Title = "Anasayfa";
+	IcerikYonetimSistemi.IslemKatmani.SayfaIslemleri si = new IcerikYonetimSistemi.IslemKatmani.SayfaIslemleri();
+	IcerikYonetimSistemi.IslemKatmani.SayfaIcerikIslemleri sii = new IcerikYonetimSistemi.IslemKatmani.SayfaIcerikIslemleri();
+	IcerikYonetimSistemi.IslemKatmani.SayfaAltIcerikIslemleri saii = new IcerikYonetimSistemi.IslemKatmani.SayfaAltIcerikIslemleri();
+	List<IcerikYonetimSistemi.VarlikKatmani.SayfaAltIcerik> slide = saii.VeriListesi(x => x.SayfaIcerikID == 26);
+}
+
+<!-- Main Content -->
+<div id="main-content" class="site-main clearfix">
+	<div id="content-wrap">
+		<div id="site-content" class="site-content clearfix">
+			<div id="inner-content" class="inner-content-wrap">
+				<div class="page-content">
+					<!-- Slider -->
+					<div class="rev_slider_wrapper fullwidthbanner-container">
+						<div id="myCarousel" class="carousel slide" data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								@for (int i = 0; i < slide.Count; i++)
+								{
+									if (i == 0)
+									{
+										<li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+									}
+									else
+									{
+										<li data-target="#myCarousel" data-slide-to="@i"></li>
+									}
+
+								}
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner">
+								@for (int i = 0; i < slide.Count; i++)
+								{
+									if (i == 0)
+									{
+										<div class="item active">
+											<img src="@slide[i].Gorsel" style="width: -webkit-fill-available;">
+											<div class="carousel-caption">
+												<h3>@slide[i].Baslik</h3>
+												<p>@Html.Raw(slide[i].Detay)</p>
+											</div>
+										</div>
+									}
+									else
+									{
+										<div class="item">
+											<img src="@slide[i].Gorsel" style="width: -webkit-fill-available;">
+											<div class="carousel-caption">
+												<h3>@slide[i].Baslik</h3>
+												<p>@Html.Raw(slide[i].Detay)</p>
+											</div>
+										</div>
+									}
+								}
+							<!-- Left and right controls -->
+							<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+								<span class="sr-only">Geri</span>
+							</a>
+							<a class="right carousel-control" href="#myCarousel" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+								<span class="sr-only">İleri</span>
+							</a>
+						</div>
+					</div>
+					<!-- /Slider -->
+					<!-- Services -->
+					<div class="row-service-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+
+									<div class="wprt-headings text-center clearfix">
+										<h2 class="heading">Neler Yapıyoruz?</h2>
+										<div class="sub-heading">Sinerji Kurumsal Olarak Bizi Öne Çıkartan Çalışmalarımız</div>
+									</div>
+
+									<div class="wprt-spacer clearfix" data-desktop="44" data-mobi="30" data-smobi="20"></div>
+								</div>
+								@foreach (var items in saii.VeriListesi(x => x.SayfaIcerikID == 11 && x.Etkin))
+								{
+									<div class="col-md-4 col-sm-6">
+										<div class="wprt-content-box style-1 hover hover-1 hover-2">
+											<div class="inner">
+												<div class="wprt-icon-box clearfix icon-top align-center">
+													<div class="icon-wrap"><i class="@items.Ikon"></i></div>
+
+													<h3 class="heading">@items.Baslik</h3>
+
+													<div class="desc">@Html.Raw(items.Detay)</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="wprt-spacer clearfix" data-desktop="30" data-mobi="30" data-smobi="30"></div>
+									</div>
+								}
+
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+								</div>
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- Services -->
+					<!-- About 1 -->
+					<div class="row-about-1">
+						<div class="container">
+							<div class="row">
+								@*<div class="col-md-12">
+										<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="60"></div>
+									</div>*@
+
+								@*<div class="col-md-6">
+										<div class="wprt-image-video w60">
+											<img alt="image" src="~/Images/bg-video-1.jpg">
+											<a class="icon-wrap popup-video" href="https://www.youtube.com/watch?v=HQzR7iiO5H4"></a>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="wprt-spacer clearfix" data-desktop="0" data-mobi="30" data-smobi="30"></div>
+
+										<div class="padding-left-30">
+											<div class="wprt-headings clearfix">
+												<h2 class="heading">Hakkımızda</h2>
+											</div>
+
+											<div class="wprt-spacer clearfix" data-desktop="41" data-mobi="30" data-smobi="10"></div>
+
+											<div class="wprt-toggles style-1 no-icon">
+												@foreach (var items in saii.VeriListesi(x => x.SayfaIcerikID == 2 && x.Etkin))
+												{
+													<div class="toggle-item">
+														<h3 class="toggle-heading">
+															<span class="inner">
+																<span class="icon-wrap"><i class="fa fa-plus"></i></span>
+																@items.Baslik
+															</span>
+														</h3>
+
+														<div class="toggle-content">
+															@Html.Raw(items.Detay)
+														</div>
+													</div><!-- /.toggles-item -->
+												}
+											</div>
+										</div>
+									</div><!-- /.col-md-6 -->*@
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+
+									@*<div class="wprt-line"></div>
+
+										<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="30"></div>*@
+
+									<div class="wprt-headings text-center clearfix">
+										<h2 class="heading">İşimizi Severek Yapıyoruz</h2>
+										<div class="sub-heading">Sizlere çok daha iyi hizmet sunmaya çalışıyoruz</div>
+									</div>
+
+									<div class="wprt-spacer clearfix" data-desktop="17" data-mobi="10" data-smobi="10"></div>
+
+									<div class="wd-850">
+										<div class="row">
+											@foreach (var items in saii.VeriListesi(x => x.SayfaIcerikID == 20))
+											{
+												<div class="col-md-2 col-sm-6">
+													<div class="wprt-counter">
+														<span class="number" data-speed="2000" data-to="@items.EkAlan1" data-inviewport="yes">@items.EkAlan1</span>
+														@if (items.EkAlan2 != "")
+														{
+															<span class="suffix">@items.EkAlan2</span>
+														}
+														<div class="heading">@items.Baslik</div>
+													</div>
+												</div>
+											}
+
+										</div><!-- /.row -->
+									</div>
+
+									<div class="wprt-spacer clearfix" data-desktop="71" data-mobi="51" data-smobi="31"></div>
+								</div>
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- /About 1 -->
+					<!-- Portfolio -->
+					<div class="row-portfolio-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+
+									<div class="wprt-headings clearfix text-center">
+										<h2 class="heading">Eğitimler</h2>
+										<div class="sub-heading">Bireysel ve Kurumsal Gelişiminiz İçin Geniş Eğitim Katalogu</div>
+									</div><!--wprt-headings -->
+
+									<div class="wprt-spacer clearfix" data-desktop="42" data-mobi="30" data-smobi="30"></div>
+
+									<div class="wprt-portfolio-grid" data-column="3" data-column2="3" data-column3="2" data-column4="1" data-gaph="30" data-gapv="30">
+										<div id="projects" class="cbp">
+
+											@foreach (var items in sii.VeriListesi(x => x.SayfaID == 4 && x.Etkin))
+											{
+												<div class="cbp-item strategy equity">
+													<div class="project-item">
+														<div class="inner">
+															<div class="effect-default">
+																<div class="project-image">
+																	<img src="@items.Gorsel" alt="@items.Baslik">
+																</div>
+
+																<div class="text">
+																	<div>
+																		<h2><a href="~/Sayfalar/Icerik/@items.SayfaIcerikID" title="">@items.Baslik</a></h2>
+																	</div>
+																</div>
+															</div><!-- /.effect-default -->
+														</div>
+													</div><!-- /.project-item -->
+												</div><!-- /.cbp-item -->
+											}
+										</div><!-- /#projects -->
+									</div><!-- /.wprt-portfolio-grid -->
+
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+								</div><!-- /.cold-md-12 -->
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- /Portfolio -->
+					<!-- Testimonials -->
+					<div class="row-testimonials-1 parallax">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="65" data-mobi="40" data-smobi="40"></div>
+
+									<div class="wprt-carousel-box bullet0 bullet-style-2 bullet-circle has-bullets" data-auto="false" data-loop="false" data-gap="0" data-column="1" data-column2="1" data-column3="1">
+										<div class="owl-carousel owl-theme">
+											@foreach (var items in saii.VeriListesi(x => x.SayfaIcerikID == 24))
+											{
+												<div class="wprt-testimonials text-center clearfix ">
+													<span class="arrow-3">“</span>
+
+													<blockquote class="text">
+														@Html.Raw(items.Detay)
+													</blockquote>
+
+													<div class="info">
+														<h6 class="name">@items.Baslik</h6>
+													</div>
+												</div><!-- /.wprt-testimonials -->
+											}
+										</div>
+									</div><!-- /.wprt-carousel-box -->
+
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+								</div><!-- /.col-md-12 -->
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- /Testimonials -->
+					<!-- News -->
+					<div class="row-news-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="80" data-mobi="60" data-smobi="40"></div>
+
+									<div class="wprt-headings clearfix text-center">
+										<h2 class="heading">Son Gelişmeler</h2>
+									</div>
+
+									<div class="wprt-spacer clearfix" data-desktop="33" data-mobi="25" data-smobi="20"></div>
+								</div>
+								@foreach (var items in sii.VeriListesi(x => x.SayfaID == 6 && x.Etkin).OrderBy(x => x.GosterimSirasi))
+								{
+									<div class="col-md-3 col-sm-6">
+										<article class="news-item style-2">
+											<div class="post-media clearfix">
+												<a class="post-img" href="~/Sayfalar/Icerik/@items.SayfaIcerikID">
+													<img src="@items.Gorsel" alt="@items.Baslik">
+												</a><!-- /.post image -->
+											</div>
+
+											<div class="post-content-wrap">
+												<h2 class="post-title">
+													<a href="~/Sayfalar/Icerik/@items.SayfaIcerikID" rel="bookmark">@items.Baslik</a>
+												</h2><!-- .post-title -->
+
+												<div class="post-meta">
+													<span class="meta date">@items.OlusturmaTarihi</span>
+												</div><!-- /.post meta -->
+											</div><!-- /.entry-content-wrap -->
+										</article><!-- /.news-item -->
+									</div>
+								}
+
+								<div class="col-md-12">
+									<div class="wprt-spacer clearfix" data-desktop="34" data-mobi="20" data-smobi="0"></div>
+								</div><!-- /.col-md-12 -->
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- /News -->
+					<!-- Partner -->
+					<div class="row-partner-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-line"></div>
+
+									<div class="wprt-partner-slider" data-auto="true" data-column="6" data-column2="4" data-column3="2" data-gap="30">
+										<div class="owl-carousel owl-theme owl-loaded owl-drag">
+											@foreach (var items in saii.VeriListesi(x => x.SayfaIcerikID == 17 && x.Etkin))
+											{
+												<div class="partner-item clearfix">
+													<img src="@items.Gorsel" alt="@items.Baslik" height="150">
+												</div>
+											}
+										</div>
+									</div>
+								</div><!-- /.col-md-12 -->
+							</div><!-- /.row -->
+						</div><!-- /.container -->
+					</div>
+					<!-- /Partner -->
+					<!-- Action box -->
+					<div class="row-action-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="wprt-action-box style-1">
+										<div class="inner">
+											<div class="heading-wrap left">
+												<div class="text-wrap">
+													<h2 class="heading">Bizimle çalışmaya ne dersiniz?</h2>
+													<span>Yandaki butona tıklayarak bizimle iletişime geçin!</span>
+												</div>
+											</div>
+
+											<div class="button-wrap right">
+												<a href="~/Sayfalar/Iletisim" class="wprt-button white">İletişime Geç</a>
+											</div>
+										</div>
+									</div><!-- /.wprt-action-box -->
+								</div><!-- /.col-md-12 -->
+							</div><!-- /row -->
+						</div><!-- /.wprt-container -->
+					</div>
+					<!-- /Action box -->
+				</div><!-- /.page-content -->
+			</div><!-- /#inner-content -->
+		</div><!-- /#site-content -->
+	</div><!-- /#content-wrap -->
+</div>
+<!-- /Main Content -->

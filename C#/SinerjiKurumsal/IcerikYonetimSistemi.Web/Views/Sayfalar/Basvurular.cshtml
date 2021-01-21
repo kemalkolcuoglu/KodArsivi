@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Başvurular";
+}
+
+@if(ViewBag.Mesaj != null)
+{
+<div class="alert-success">
+	<p>Talebiniz başarılı bir şekilde iletilmiştir!</p>
+</div>
+}
+
+<div class="container">
+	<h2 class="text-center">Başvurular</h2>
+	<div class="col-md-4" style="border:solid 1px;">
+		@Html.Action("OgrenciBasvuru")
+	</div>
+	<div class="col-md-4" style="border:solid 1px;">
+		@Html.Action("KulupBasvuru")
+	</div>
+	<div class="col-md-4" style="border:solid 1px;">
+		@Html.Action("KurumBasvuru")
+	</div>
+</div>
